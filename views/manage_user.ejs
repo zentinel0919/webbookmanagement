@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Management</title>
+  <style>
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  h1, h2, h3 {
+    margin: 0;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  main {
+    margin: 20px;
+  }
+  
+  section {
+    margin-bottom: 20px;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+  width: 100%;
+  bottom: 0;
+  }
+  
+  /* Admin Dashboard Specific Styles */
+  h2 {
+    margin-top: 0;
+  }
+  
+  a {
+    color: #0066cc;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  p {
+    line-height: 1.5;
+  }
+  
+  /* Book Management Section */
+  h3 {
+    margin-top: 0;
+  }
+  
+  /* User Management Section */
+  /* admin.css */
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  margin: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Admin Dashboard Specific Styles */
+h2 {
+  margin-top: 0;
+}
+
+a {
+  color: #0066cc;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  line-height: 1.5;
+}
+
+/* Book Management Section */
+h3 {
+  margin-top: 0;
+}
+/* User Management Section */
+
+
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    a {
+      text-decoration: none;
+      color: #065fd4;
+    }
+
+    button {
+      padding: 5px 10px;
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c9302c;
+    }
+
+  </style>
+</head>
+<body>
+    <header>
+        <h1>User Management</h1>
+        <nav>
+          <ul>
+            <li><a href="/directory">Dashboard</a></li>
+            <li><a href="/admin/book">Book Management</a></li>
+            <li><a href="/admin/users">User Management</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </nav>
+      </header>
+      
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(function(user) { %>
+        <% if (!user.isAdmin) { %> <!-- Exclude admin users -->
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+              <a href="/admin/user/edit/<%= user.id %>">Edit</a>
+              <form action="/admin/user/delete/<%= user.id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                <button type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% } %>
+      <% }); %>
+    </tbody>
+  </table>
+  <footer>
+    <p>&copy; 2023 Admin Dashboard. All rights reserved.</p>
+  </footer>
+</body>
+</html>

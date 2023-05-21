@@ -1,0 +1,19 @@
+body{
+	text-align: center !important;
+    background-color: rgb(158, 140, 140);
+    background-image: url('/assets/webbg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+p{
+	margin-top: 20px;
+	font-size: 30px;
+}
+input{
+	text-align: center;
+}
+.mssg{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}

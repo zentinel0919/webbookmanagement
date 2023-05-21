@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+  
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      margin-bottom: 1%;
+    }
+  
+    h1, h2, h3 {
+      margin: 0;
+    }
+  
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+  
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+  
+    main {
+      margin: 20px;
+    }
+  
+    section {
+      margin-bottom: 20px;
+    }
+  
+    footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+  width: 100%;
+  bottom: 0;
+  }
+  
+    /* Admin Dashboard Specific Styles */
+    h2 {
+      margin-top: 0;
+    }
+  
+    a {
+      color: #0066cc;
+    }
+  
+    a:hover {
+      text-decoration: underline;
+    }
+  
+    p {
+      line-height: 1.5;
+    }
+  
+    /* Edit User Form Styles */
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+  
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <h1>Edit Profile</h1>
+        <nav>
+          <ul>
+            <li><a href="/directory">Home</a></li>
+            <li><a href="/user/favorites">Favorite</a></li>
+            <li><a href="/user/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </nav>
+      </header>
+      
+  <form action="/profile" method="POST">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" value="<%= user.username %>" required>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="<%= user.email %>" required>
+    </div>
+    <div>
+      <label for="password">Current Password:</label>
+      <input type="password" id="password" name="password" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
+    </div>
+    <div>
+      <label for="newPassword">New Password:</label>
+      <input type="password" id="newPassword" name="newPassword" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
+    </div>
+    <div>
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="passwordConf" name="passwordConf"  required>
+    </div>
+    <div>
+      <button type="submit">Save Changes</button>
+    </div>
+  </form>
+  <footer>
+    <p>&copy; 2023 User. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit User</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+  
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+    }
+  
+    h1, h2, h3 {
+      margin: 0;
+    }
+  
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+  
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+  
+    main {
+      margin: 20px;
+    }
+  
+    section {
+      margin-bottom: 20px;
+    }
+  
+    footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+  width: 100%;
+  bottom: 0;
+  }
+  
+    /* Admin Dashboard Specific Styles */
+    h2 {
+      margin-top: 0;
+    }
+  
+    a {
+      color: #0066cc;
+    }
+  
+    a:hover {
+      text-decoration: underline;
+    }
+  
+    p {
+      line-height: 1.5;
+    }
+  
+    /* Edit User Form Styles */
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="checkbox"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+  
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Edit User</h1>
+    <nav>
+      <ul>
+        <li><a href="/admin/book">Book Management</a></li>
+        <li><a href="/admin/users">User Management</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <form action="/admin/user/edit/<%= user.id %>" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" value="<%= user.username %>" required>
+      <br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="<%= user.email %>" required>
+      <br>
+      <label for="isAdmin">Admin:</label>
+      <input type="checkbox" id="isAdmin" name="isAdmin" <% if (user.isAdmin) { %>checked<% } %>>
+      <br>
+      <button type="submit">Save Changes</button>
+    </form>
+  </main>
+  <footer>
+    <p>&copy; 2023 Admin Dashboard. All rights reserved.</p>
+  </footer>
+</body>
+</html>

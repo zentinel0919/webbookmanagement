@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = "mongodb+srv://harvey:natividad@cluster0.xcod1uv.mongodb.net/test"
+}
+
+model User {
+  id            Int      @id @map("_id")
+  unique_id     Int
+  email         String   @unique
+  gender        String
+  username      String
+  password      String
+  passwordConf  String
+  isAdmin       Boolean  @default(false)
+}
+
+model Book {
+  id           String         @id @default(uuid()) @map("_id")
+  title        String
+  author       String
+  description  String
+  genre        String
+  image        String
+
+  favoritedBy  FavoriteBook[]
+}
+
+model FavoriteBook {
+  id          String  @id @default(uuid()) @map("_id")
+  userId      Int
+  bookId      String
+  title       String?
+  author      String?
+  genre       String?
+  image       String?
+  book        Book    @relation(fields: [bookId], references: [id])
+
+  @@unique([userId, bookId])
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WELCOME</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./css/main.css">
+
+    <script type="text/javascript">
+
+
+    // Caesar cipher encryption
+    function encrypt(text, shift) {
+      var result = "";
+      for (var i = 0; i < text.length; i++) {
+        var charCode = text.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) {
+          result += String.fromCharCode(((charCode - 65 + shift) % 26) + 65); // Uppercase letters
+        } else if (charCode >= 97 && charCode <= 122) {
+          result += String.fromCharCode(((charCode - 97 + shift) % 26) + 97); // Lowercase letters
+        } else {
+          result += text.charAt(i); // Non-alphabetic characters
+        }
+      }
+      return result;
+    }
+
+    
+
+    // Caesar cipher decryption
+    function decrypt(text, shift) {
+      var result = "";
+      for (var i = 0; i < text.length; i++) {
+        var charCode = text.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) {
+          result += String.fromCharCode(((charCode - 65 - shift + 26) % 26) + 65); // Uppercase letters
+        } else if (charCode >= 97 && charCode <= 122) {
+          result += String.fromCharCode(((charCode - 97 - shift + 26) % 26) + 97); // Lowercase letters
+        } else {
+          result += text.charAt(i); // Non-alphabetic characters
+        }
+      }
+      return result;
+    }
+
+
+
+      window.onclick = function(event) {
+    var modal1 = document.getElementById('Login-modal');
+    if (event.target == modal1) {
+      modal1.style.display = "none"
+    }
+  }
+
+  $(document).ready(function() {
+
+    // handle form submission for registration
+    $("#form1").submit(function (event) {
+      event.preventDefault();
+  
+      // make AJAX request for registration
+      $.ajax({
+        
+        type: 'POST',
+        url: '/',
+        data: $('#form1').serialize(),
+        dataType: "json",
+        success: function (response) {
+          $('#form1')[0].reset();
+          document.getElementById("check").innerHTML = response.Success;
+  
+          // hide message after 3 seconds
+          setTimeout(function () {
+            document.getElementById("check").innerHTML = "";
+          }, 3000);
+  
+          // if registration was successful, click on login button
+          if (response.Success == "You are regestered,You can login now.") {
+            document.getElementById("aa").click();
+          };
+        },
+        error: function () {
+        }
+      });
+    });
+  
+    // handle form submission for login
+    $( "#form" ).submit(function(event) {
+      event.preventDefault();
+  
+      // make AJAX request for login
+      $.ajax({
+        type: 'POST',
+        url: '/login',
+        data: $('#form').serialize(),
+        dataType: "json",
+        success: function(response){
+          $('#form')[0].reset();
+          document.getElementById("check").innerHTML=response.Success;
+  
+          // hide message after 3 seconds
+          setTimeout(function(){
+            document.getElementById("check").innerHTML="";
+          },3000);
+  
+          // if login was successful, click on login button
+          if (response.Success=="Success!") {
+            document.getElementById("aa").click();
+          };
+        },
+        error: function() {
+        }
+      });
+    });
+  });
+  
+    </script>
+
+    <style>
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-content-login {
+        background-color: #fefefe;
+        margin: 8% auto;
+        padding-right: 10%;
+        padding-left: 10%;
+        border: 1px solid #888;
+        width: 60%;
+        background-position-y: 35%;
+        background-position-x: 35%;
+        background-repeat: no-repeat;
+        background-size: auto;
+        box-shadow: 0px 0px 15px 1px rgb(0, 0, 0);
+      }
+
+      .modal-content-register {
+        background-color: #fefefe;
+        margin: 4% auto;
+        padding-right: 10%;
+        padding-left: 10%;
+        border: 1px solid #888;
+        width: 60%;
+        background-position-y: 35%;
+        background-position-x: 35%;
+        background-repeat: no-repeat;
+        background-size: auto;
+        box-shadow: 0px 0px 15px 1px rgb(0, 0, 0);
+      }
+
+      .close {
+        color: #1a1717;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: rgb(68, 32, 32);
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      
+
+    </style>
+  </head>
+
+  <body>
+
+    <div class="border-container">
+      <div class="button-container">
+  <button class="btn btn-success login" onclick="document.getElementById('Login-modal').style.display='block'">Login</button>
+	<button class="btn btn-success register" onclick="document.getElementById('Register-modal').style.display='block'">Register</button>
+</div>
+
+    <!-- Modal -->
+    <div id="Login-modal" class="modal">
+      <div class="modal-content-login">
+        <span class="close" onclick="document.getElementById('Login-modal').style.display='none'">&times;</span>
+        <div>
+            <p>&nbsp&nbsp Login</p>
+          </div>
+          <div class="form-group">
+            <form id="form" method="post" >
+              <input type="text" name="email" placeholder="E-mail" required="" class="form-control"><br/>
+              <input type="password" id="password" name="password" placeholder="Password" required="" class="form-control"><br/>
+              <input type="submit" value="Login" class="btn btn-success">
+            </form>
+          </div>
+          <div class="mssg bg-danger">
+            <span id="check" ></span>
+          </div>
+          <div id="LangTable"><a href="/directory" id="aa"></a>
+          </div>
+        </div>
+</div>
+
+
+
+<div id="Register-modal" class="modal">
+  <div class="modal-content-register">
+    <span class="close" onclick="document.getElementById('Register-modal').style.display='none'">&times;</span>
+		<div>
+			<p>&nbsp&nbsp Register Now</p>
+		</div>
+		<div class="form-group">
+			<form id="form1" method="post">
+				<input type="email" name="email" placeholder="E-mail" required="" class="form-control"><br />
+				<input type="text" name="username" placeholder="Username" required="" class="form-control"><br />
+        <select class="form-control" name="gender" id="gender" required="">
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select><br />
+				<input type="password" id="password" name="password" placeholder="Password" required="" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" class="form-control"><br />
+				<input type="password" name="passwordConf" placeholder="Confirm Password" required="" class="form-control"><br />
+        <label for="admin">Admin:</label>
+        <input type="checkbox" name="admin" id="admin" class="form-control"><br />
+				<input type="submit" value="Register" class="btn btn-success">
+			</form>
+		</div>
+		<div class="mssg bg-danger">
+      
+			<span id="check"></span>
+		</div>
+  </div>
+  </div>
+  </body>
+</html>
