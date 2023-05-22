@@ -16,6 +16,9 @@ input{
 	margin-top: 5px;
 	margin-bottom: 5px;
 	border-radius: 5px;
+  width: 100%;
+  z-index: 999;
+  position: absolute;
 }
 
 .leftbox {

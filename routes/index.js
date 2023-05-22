@@ -5,8 +5,17 @@ var crypto = require('crypto');
 var prisma = new PrismaClient();
 const multer = require('multer');
 const path = require('path');
+const Joi = require('joi');
 const Chart = require('chart.js');
 
+
+const registrationSchema = Joi.object({
+  email: Joi.string().email().required(),
+  username: Joi.string().required(),
+  password: Joi.string().required(),
+  passwordConf: Joi.string().required(),
+  gender: Joi.string().allow('', null),
+});
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -51,7 +60,6 @@ router.post('/', async function (req, res, next) {
   console.log(req.body);
   var personInfo = req.body;
 
-  // Existing code...
 
   if (!personInfo.email || !personInfo.username || !personInfo.password || !personInfo.passwordConf) {
     res.send();
@@ -96,6 +104,8 @@ router.post('/', async function (req, res, next) {
       res.send({ Success: 'Password does not match.' });
     }
   }
+
+
 
 // ADMIN DASHBOARD
 router.get('/admin', async (req, res) => {
@@ -400,6 +410,17 @@ router.post('/admin/user/delete/:id', async function (req, res, next) {
 //LOGIN
 router.post('/login', async function (req, res, next) {
   var userId = req.session.userId;
+
+  const { error } = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  }).validate(req.body);
+
+  if (error) {
+    res.send({ Error: error.details[0].message });
+    return;
+  }
+
   var data = await prisma.user.findUnique({
     where: { email: req.body.email },
   });
@@ -520,7 +541,7 @@ router.post('/profile', async function (req, res, next) {
         },
       });
 
-      res.send({ Success: 'Profile updated successfully!' });
+      return res.render('/directory', { user });
     }
   }
 });
