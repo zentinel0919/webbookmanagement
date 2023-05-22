@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "This is a user login and registration app using Node.js, Express, Mongoose and express-sessions. ",
   "main": "server.js",
+  "engines": {
+    "node": " >= 14.20.1"},
   "dependencies": {
     "@prisma/client": "^4.14.1",
     "chart.js": "^4.3.0",
