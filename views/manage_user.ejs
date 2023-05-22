@@ -8,12 +8,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-image: url("/assets/webbg.jpg");
   }
   
   header {
     background-color: #333;
     color: #fff;
     padding: 20px;
+    box-shadow: 2px 2px 1px 1px #00000057;
   }
   
   h1, h2, h3 {
@@ -38,6 +40,8 @@ body {
   
   main {
     margin: 20px;
+    background-color: rgb(212, 217, 221);
+    box-shadow: 1px 1px 1px 1px black;
   }
   
   section {
@@ -86,11 +90,6 @@ body {
   padding: 0;
 }
 
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-}
 
 h1,
 h2,
@@ -157,6 +156,7 @@ h3 {
     table {
       width: 100%;
       border-collapse: collapse;
+      box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
     }
 
     th, td {
@@ -205,7 +205,8 @@ h3 {
           </ul>
         </nav>
       </header>
-      
+      <main>
+        <section>
   <table>
     <thead>
       <tr>
@@ -233,6 +234,8 @@ h3 {
       <% }); %>
     </tbody>
   </table>
+</main>
+</section>
   <footer>
     <p>&copy; 2023 Admin Dashboard. All rights reserved.</p>
   </footer>

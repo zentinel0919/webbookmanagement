@@ -3,17 +3,82 @@
 <head>
   <title>Edit Profile</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+    form {
+      background-color: #fefefe;
+        margin: 8% auto;
+        padding: 4%;
+        border: 1px solid #888;
+        width: 40%;
+        background-position-y: 35%;
+        background-position-x: 35%;
+        background-repeat: no-repeat;
+        backdrop-filter: blur(20px);
+        background-size: auto;
+        box-shadow: 0px 0px 5px 1px rgb(0, 0, 0);
+        border-radius: 5%;
+        z-index: 999;
     }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    select {
+      width: 70%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23333' d='M7.5 10l5-5 5 5H7.5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 12px;
+    }
+
+
+    input[type="file"] {
+      margin-bottom: 10px;
+    }
+
+    button[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    /* Responsive Styles */
+    @media screen and (max-width: 768px) {
+      .book-item {
+        width: 100%;
+      }
+    }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("/assets/webbg.jpg");
+    backdrop-filter: blur(20px);
+  }
   
     header {
       background-color: #333;
       color: #fff;
       padding: 20px;
-      margin-bottom: 1%;
+      margin-bottom: 2.5%;
+      box-shadow: 2px 2px 1px 1px #00000057;
     }
   
     h1, h2, h3 {
@@ -36,23 +101,21 @@
       text-decoration: none;
     }
   
-    main {
-      margin: 20px;
-    }
   
     section {
       margin-bottom: 20px;
     }
   
     footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    position: fixed;
-  width: 100%;
-  bottom: 0;
-  }
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      position: relative;
+      width: 100%;
+      bottom: 0;
+      margin-top: 5%;
+    }
   
     /* Admin Dashboard Specific Styles */
     h2 {
@@ -105,6 +168,27 @@
     button[type="submit"]:hover {
       background-color: #45a049;
     }
+    
+    /* User Icon Styles */
+    .user-icon {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-bottom: 10px;
+      text-align: center;
+      margin-left: 40%;
+    }
+    
+    .male-icon {
+      background-image: url("/assets/male.png"); /* Replace with the actual male icon URL */
+    }
+    
+    .female-icon {
+      background-image: url("/assets/female.png"); /* Replace with the actual female icon URL */
+    }
   </style>
 </head>
 <body>
@@ -119,8 +203,10 @@
           </ul>
         </nav>
       </header>
-      
+      <main>
+        <section>
   <form action="/profile" method="POST">
+    <div class="user-icon <% if (user.gender === 'male') { %>male-icon<% } else if (user.gender === 'female') { %>female-icon<% } %>"></div>
     <div>
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" value="<%= user.username %>" required>
@@ -145,6 +231,8 @@
       <button type="submit">Save Changes</button>
     </div>
   </form>
+</main>
+</section>
   <footer>
     <p>&copy; 2023 User. All rights reserved.</p>
   </footer>

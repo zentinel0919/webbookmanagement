@@ -3,16 +3,19 @@
 <head>
   <title>User Directory</title>
   <style>
-    /* Global Styles */
+
     body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("/assets/webbg.jpg");
+    }
   
   
   h1, h2, h3 {
     margin: 0;
+    color: white;
+  text-shadow: 5px 5px 2px #333;
   }
   
   nav ul {
@@ -38,13 +41,7 @@
   section {
     margin-bottom: 20px;
   }
-  
-  footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-  }
+
   
   /* Admin Dashboard Specific Styles */
   h2 {
@@ -68,15 +65,6 @@
     margin-top: 0;
   }
   
-  /* User Management Section */
-  /* admin.css */
-
-/* Global Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
 
 header {
   background-color: #333;
@@ -162,7 +150,7 @@ h3 {
   width: calc(48% - 10px);
   display: flex;
   align-items: center;
-  background-color: #00ffd957;
+  background-color: #ffffffcb;
   border-radius: 5px;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
@@ -173,6 +161,24 @@ h3 {
   width: 100px; /* Adjust the width as desired */
   height: 100px; /* Adjust the height as desired */
 }
+
+#searchInput {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+    }
+
+    #searchInput::placeholder {
+      color: #999;
+    }
+
+    #searchInput:focus {
+      outline: none;
+      border-color: #0066cc;
+      box-shadow: 0 0 5px #0066cc;
+    }
 
 .book-image img {
   max-width: 100%;
@@ -188,6 +194,8 @@ h3 {
       margin-top: 5px;
       color: #666;
     }
+
+
   </style>
 </head>
 <body>
@@ -204,7 +212,8 @@ h3 {
   </header>
   <main>
     <section>
-  <h2>Favorite Book List</h2>
+  <h2>Favorite Book List</h2><br>
+  <input type="text" id="searchInput" placeholder="Search by title or author" onkeyup="filterBooks()">
   <div class="book-list">
     <% if (favoriteBooks && favoriteBooks.length > 0) { %>
       <% favoriteBooks.forEach(function(favoriteBook) { %>
@@ -230,13 +239,28 @@ h3 {
   </div>
     </section>
   </main>
-  <footer>
-    <p>&copy; 2023 User. All rights reserved.</p>
-  </footer>
   <script>
     function removeFromFavorites(event) {
       event.preventDefault();
-  
+
+      function filterBooks() {
+          const input = document.getElementById('searchInput');
+          const filter = input.value.toLowerCase();
+          const bookItems = document.getElementsByClassName('book-item');
+
+          // Iterate through each book item and hide/show based on the filter
+          for (let i = 0; i < bookItems.length; i++) {
+            const title = bookItems[i].querySelector('.book-title').textContent.toLowerCase();
+            const author = bookItems[i].querySelector('.book-author').textContent.toLowerCase();
+
+            if (title.includes(filter) || author.includes(filter)) {
+              bookItems[i].style.display = '';
+            } else {
+              bookItems[i].style.display = 'none';
+            }
+          }
+        }
+
       const form = document.getElementById('removeFavoriteForm');
       const userId = form.querySelector('input[name="userId"]').value;
       const bookId = form.querySelector('input[name="bookId"]').value;
@@ -255,5 +279,8 @@ h3 {
         });
     }
   </script>
+    <footer>
+      <p>&copy; 2023 User. All rights reserved.</p>
+    </footer>
 </body>
 </html>

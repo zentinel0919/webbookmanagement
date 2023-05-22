@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="./css/admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
@@ -19,24 +21,48 @@
   <main>
     <h2>Admin Dashboard</h2>
     <section>
-      <h3>Book Management</h3>
-      <p>
-        Here you can add new books, edit book details, and delete books from the collection.
-        <br>
-        <a href="/admin/book">Go to Book Management</a>
-      </p>
-    </section>
-    <section>
-      <h3>User Management</h3>
-      <p>
-        Here you can view and manage user accounts, including editing user details and deleting user accounts.
-        <br>
-        <a href="/admin/users">Go to User Management</a>
-      </p>
+      <br>
+      This chart contains the number of users and the number of books recorded
+      <canvas class="chart" id="chart" data-user-count="<%- userCount %>" data-book-count="<%- bookCount %>"></canvas>
     </section>
   </main>
   <footer>
     <p>&copy; 2023 Admin Dashboard. All rights reserved.</p>
   </footer>
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var chartElement = document.getElementById('chart');
+      var userCount = parseInt(chartElement.dataset.userCount);
+      var bookCount = parseInt(chartElement.dataset.bookCount);
+  
+      var ctx = chartElement.getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Users', 'Books'],
+          datasets: [{
+            label: 'Count',
+            data: [userCount, bookCount],
+            backgroundColor: ['#ff6384', '#36a2eb'],
+            borderColor: ['#2c2a2a', '#2c2a2a'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              precision: 0
+            }
+          }
+        }
+      });
+    });
+  </script>
+  
+
 </body>
 </html>

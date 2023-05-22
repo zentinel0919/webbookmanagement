@@ -9,7 +9,7 @@ var MongoStore = require('connect-mongo')(session);
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const multer = require('multer');
-const upload = multer({ dest: 'views/assets/images' });
+const upload = multer({ dest: path.join(__dirname, 'views', 'assets', 'images') });
 
 app.use(session({
   secret: 'kahitano',
@@ -43,21 +43,13 @@ app.use(function (req, res, next) {
 
 
 app.post('/admin/book/add', upload.single('image'), (req, res) => {
-  // Access the uploaded file using req.file
-  // Save the book details and file information to the database
-  // Return a response to the client
   res.status(200).send('Book added successfully!');
 });
 
 app.post('/admin/book/edit/:bookId', upload.single('image'), (req, res) => {
   const bookId = req.params.bookId;
-  // Access the uploaded file using req.file (if a new image was uploaded)
-  // Update the book details and file information in the database
-  // Return a response to the client
   res.status(200).send(`Book ${bookId} edited successfully!`);
 });
-// error handler
-// define as the last app.use callback
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.send(err.message);

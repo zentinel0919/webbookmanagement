@@ -2,10 +2,26 @@ var express = require('express');
 var router = express.Router();
 var { PrismaClient } = require('@prisma/client');
 var crypto = require('crypto');
+var prisma = new PrismaClient();
 const multer = require('multer');
 const path = require('path');
+const Chart = require('chart.js');
 
-var prisma = new PrismaClient();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, 'views', 'assets', 'images'));
+  },
+  filename: function (req, file, cb) {
+    // Generate a unique filename by adding a timestamp to the original filename
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    const extname = path.extname(file.originalname);
+    cb(null, file.fieldname + '-' + uniqueSuffix + extname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
 
 // Caesar cipher encryption function
 function encrypt(plaintext) {
@@ -82,47 +98,40 @@ router.post('/', async function (req, res, next) {
   }
 
 // ADMIN DASHBOARD
-  router.get('/admin', async function (req, res, next) {
-    var userId = req.session.userId; // Assuming the user ID is stored in the session
-  
+router.get('/admin', async (req, res) => {
+  try {
+    const userId = req.session.userId;
+
     if (!userId) {
-      res.redirect('/');
-    } else {
-      var data = await prisma.user.findUnique({
-        where: {
-          id: userId,
-        },
-      });
-  
-      if (!data || !data.isAdmin) {
-        res.redirect('/');
-      } else {
-        // Render the admin dashboard
-        return res.render('admin.ejs', { name: data.username, email: data.email });
-      }
+      return res.redirect('/');
     }
-  });
+
+    const userData = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!userData || !userData.isAdmin) {
+      return res.redirect('/');
+    }
+
+    const userCount = await prisma.user.count();
+    const bookCount = await prisma.book.count();
+
+    // Render the admin dashboard with user and book counts
+    res.render('admin.ejs', { name: userData.username, email: userData.email, userCount, bookCount });
+  } catch (error) {
+    console.error('Error retrieving admin dashboard data:', error);
+    res.status(500).json({ error: 'Something went wrong' });
+  }
+});
 
 });
 
 
-// Set up multer storage configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'views/assets/images');
-  },
-  filename: function (req, file, cb) {
-    // Generate a unique filename by adding a timestamp to the original filename
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const extname = path.extname(file.originalname);
-    cb(null, file.fieldname + '-' + uniqueSuffix + extname);
-  },
-});
 
 
-
-// Create a multer upload instance
-const upload = multer({ storage: storage });
 
 router.get('/admin/book', async function (req, res, next) {
   var userId = req.session.userId;
@@ -194,7 +203,7 @@ router.post('/admin/book/edit/:id', upload.single('image'), async function (req,
   if (!data || !data.isAdmin) {
     res.redirect('/');
   } else {
-    var { title, author, genre } = req.body;
+    var { title, author, genre, description } = req.body;
     var bookId = req.params.id;
     
     var defaultImage = 'book.png';
@@ -227,20 +236,46 @@ router.post('/admin/book/delete/:id', async function (req, res, next) {
       id: userId,
     },
   });
+
   if (!data || !data.isAdmin) {
     res.redirect('/');
   } else {
     var bookId = req.params.id;
 
-    await prisma.book.delete({
-      where: {
-        id: bookId,
-      },
-    });
+    try {
+      // Check if the book is favorited by any users
+      const favoritedByUsers = await prisma.favoriteBook.findMany({
+        where: {
+          bookId,
+        },
+      });
 
-    res.redirect('/admin/book');
+      if (favoritedByUsers.length > 0) {
+        // Delete the book from favorite lists of all users
+        await prisma.favoriteBook.deleteMany({
+          where: {
+            bookId,
+          },
+        });
+      }
+
+      // Delete the book
+      await prisma.book.delete({
+        where: {
+          id: bookId,
+        },
+      });
+
+      res.redirect('/admin/book');
+    } catch (error) {
+      console.error('Error deleting book:', error);
+      res.status(500).json({ error: 'Something went wrong' });
+    }
   }
 });
+
+
+
 
 
 //BOOKS DETAILS
@@ -403,8 +438,11 @@ router.get('/directory', async function (req, res, next) {
       res.redirect('/');
     } else {
       if (data.isAdmin) {
-        // Render the admin dashboard
-        return res.render('admin.ejs', { name: data.username, email: data.email });
+        const userCount = await prisma.user.count();
+        const bookCount = await prisma.book.count();
+    
+        // Render the admin dashboard with user and book counts
+        return res.render('admin.ejs', { name: data.username, email: data.email, userCount, bookCount });
       } else {
 
         // Render the user dashboard

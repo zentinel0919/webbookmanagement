@@ -2,14 +2,13 @@
 <html>
 <head>
   <title>Book Management</title>
-  <link rel="stylesheet" href="./css/admin.css">
-
   <style>
     /* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-image: url('/assets/webbg.jpg');
   }
   
   header {
@@ -79,15 +78,6 @@ body {
     margin-top: 0;
   }
   
-  /* User Management Section */
-  /* admin.css */
-
-/* Global Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
 
 
 h1,
@@ -123,6 +113,8 @@ section {
 /* Admin Dashboard Specific Styles */
 h2 {
   margin-top: 0;
+  color: white;
+  text-shadow: 5px 5px 2px #333;
 }
 
 a {
@@ -142,6 +134,16 @@ h3 {
   margin-top: 0;
 }
 
+.book-management{
+  color: #fefefe;
+  text-shadow: 5px 5px 2px #333;
+}
+
+.del-book{
+  color: #fefefe;
+  text-shadow: 5px 5px 2px #333;
+}
+
 /* User Management Section */
 
 .book-list {
@@ -151,16 +153,34 @@ h3 {
       margin-top: 20px;
     }
 
-  .book-item {
+    .book-item {
   width: calc(48% - 10px);
   display: flex;
   align-items: center;
-  background-color: #00ffd957;
+  background-color: #ffffffcb;
   border-radius: 5px;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   padding: 1%;
 }
+
+#searchInput {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+    }
+
+    #searchInput::placeholder {
+      color: #999;
+    }
+
+    #searchInput:focus {
+      outline: none;
+      border-color: #0066cc;
+      box-shadow: 0 0 5px #0066cc;
+    }
 
 .book-image {
   width: 100px; /* Adjust the width as desired */
@@ -183,6 +203,130 @@ h3 {
       color: #666;
     }
 
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    select {
+      width: 70%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23333' d='M7.5 10l5-5 5 5H7.5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 12px;
+    }
+
+
+    input[type="file"] {
+      margin-bottom: 10px;
+    }
+
+    button[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      box-shadow: 2px 2px 1px 1px #00000057;
+    }
+
+    /* Responsive Styles */
+    @media screen and (max-width: 768px) {
+      .book-item {
+        width: 100%;
+      }
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-content-add {
+        background-color: #fefefe;
+        margin: 8% auto;
+        padding: 4%;
+        border: 1px solid #888;
+        width: 60%;
+        background-position-y: 1%;
+        background-position-x: 35%;
+        background-repeat: no-repeat;
+        background-size: auto;
+        box-shadow: 0px 0px 15px 1px rgb(0, 0, 0);
+      }
+
+      .modal-content-edit {
+        background-color: #fefefe;
+        margin: 4% auto;
+        padding: 4%;
+        border: 1px solid #888;
+        width: 60%;
+        background-position-y: 35%;
+        background-position-x: 35%;
+        background-repeat: no-repeat;
+        background-size: auto;
+        box-shadow: 0px 0px 15px 1px rgb(0, 0, 0);
+      }
+
+      .close {
+        color: #1a1717;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: rgb(68, 32, 32);
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .add {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      box-shadow: 2px 2px 1px 1px #00000057;
+      }
+
+      .edit {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      box-shadow: 2px 2px 1px 1px #00000057;
+      }
+
   </style>
 </head>
 <body>
@@ -200,6 +344,25 @@ h3 {
   
   <main>
     <section>
+      <div class="button-container">
+        <h2 class="book-management">Book Management</h2><br>
+        <button class="btn btn-success add" onclick="document.getElementById('add-modal').style.display='block'">Add</button>
+        <button class="btn btn-success edit" onclick="document.getElementById('edit-modal').style.display='block'">Edit</button>
+      </div>
+      <br>
+
+      <h3 ckass="del-book">Delete Book</h3>
+      <br>
+      <form id="delete-book-form">
+        <select id="delete-book-select" name="bookId">
+          <% books.forEach(function(book) { %>
+            <option value="<%= book.id %>"><%= book.title %></option>
+          <% }); %>
+        </select>
+        <button onclick="refreshPage()" type="submit" class="delete-book-btn">Delete Book</button>
+      </form>
+
+
       <input type="text" id="searchInput" placeholder="Search by title or author" onkeyup="filterBooks()">
       <div class="book-list">
         <% books.forEach(function(book) { %>
@@ -218,11 +381,17 @@ h3 {
         <% }) %>
       </div>
       
-      <h2>Book Management</h2><br>
-      <h3>Add New Book</h3>
+      <div id="add-modal" class="modal">
+        <div class="modal-content-add">
+          <span class="close" onclick="document.getElementById('add-modal').style.display='none'">&times;</span>
+          <div>
+      <h3>Add New Book</h3><br>
       <form id="add-book-form" enctype="multipart/form-data" action="/admin/book/add" method="POST"">
+        <label for="edit-title">Title</label>
         <input type="text" name="title" placeholder="Title" required>
+        <label for="edit-author">Author</label>
         <input type="text" name="author" placeholder="Author" required>
+        <label for="edit-genre">Genre</label>
         <select class="form-control" name="genre" id="genre" required="">
           <option value="">Select Genre</option>
           <option value="Fantasy">Fantasy</option>
@@ -236,21 +405,32 @@ h3 {
           <option value="Self-Help-Book">Self Help Book</option>
           <option value="Reference-Book">Reference Book</option>
         </select><br />
+        <label for="edit-description">Description</label>
         <input type="text" name="description" placeholder="Description" required>
+        <label for="edit-image">Image</label>
         <input type="file" name="image" required>
-        
-        <button type="submit">Add Book</button>
+        <button onclick="refreshPage()" type="submit">Add Book</button>
       </form>
-      
-      <h3>Edit Book Details</h3>
+      </div>
+      </div></div>
+
+
+      <div id="edit-modal" class="modal">
+        <div class="modal-content-edit">
+          <span class="close" onclick="document.getElementById('edit-modal').style.display='none'">&times;</span>
+          <div>
+      <h3>Edit Book Details</h3><br>
       <form id="edit-book-form" enctype="multipart/form-data" action="/admin/book/add" method="POST"">
         <select id="book-select" name="bookId">
           <% books.forEach(function(book) { %>
             <option value="<%= book.id %>"><%= book.title %></option>
           <% }); %>
         </select>
+        <label for="edit-title">New Title</label>
         <input type="text" id="edit-title" name="title" placeholder="Title" required>
+        <label for="edit-author">New Author</label>
         <input type="text" id="edit-author" name="author" placeholder="Author" required>
+        <label for="edit-genre">New Genre</label>
         <select class="form-control" name="genre" id="genre" required="">
           <option value="">Select Genre</option>
           <option value="Fantasy">Fantasy</option>
@@ -264,29 +444,29 @@ h3 {
           <option value="Self-Help-Book">Self Help Book</option>
           <option value="Reference-Book">Reference Book</option>
         </select><br /> 
-        <input type="text" id="edit-description" name="description" placeholder="Description" required>
+        <label for="edit-description">New Description</label>
+        <input type="text" name="description" placeholder="Description" required>
+        <label for="edit-image">New Image</label>
         <input type="file" name="image" required>
-        <button type="submit" class="edit-book-btn">Save Changes</button>
+        <button onclick="refreshPage()" type="submit" class="edit-book-btn">Save Changes</button>
       </form>
-      
-      <h3>Delete Book</h3>
-      <form id="delete-book-form">
-        <select id="delete-book-select" name="bookId">
-          <% books.forEach(function(book) { %>
-            <option value="<%= book.id %>"><%= book.title %></option>
-          <% }); %>
-        </select>
-        <button type="submit" class="delete-book-btn">Delete Book</button>
-      </form>
+      </div></div></div>
+
     </section>
   </main>
-  
   <footer>
     &copy; 2023 Admin Dashboard
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
+
+    function refreshPage() {
+      setTimeout(function() {
+          location.reload();
+        }, 2000);
+    }
+    
         function filterBooks() {
           const input = document.getElementById('searchInput');
           const filter = input.value.toLowerCase();
@@ -305,6 +485,13 @@ h3 {
           }
         }
 
+        
+      window.onclick = function(event) {
+    var modal = document.getElementById('add-modal');
+    if (event.target == modal) {
+      modal.style.display = "none"
+    }
+  }
 
       $(document).ready(function() {
       // Add Book Form Submission

@@ -1,9 +1,11 @@
 /* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+body{
+    background-color: rgb(158, 140, 140);
+    background-image: url('/assets/webbg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+}
   
   header {
     background-color: #333;
@@ -14,6 +16,7 @@ body {
   
   h1, h2, h3 {
     margin: 0;
+    text-shadow: 3px 3px 2px #333;
   }
   
   nav ul {
@@ -45,6 +48,7 @@ body {
     color: #fff;
     padding: 10px;
     text-align: center;
+    
   }
   
   /* Admin Dashboard Specific Styles */
@@ -120,7 +124,7 @@ footer {
   color: #fff;
   padding: 10px;
   text-align: center;
-  position: fixed;
+  position: relative;
   width: 100%;
   bottom: 0;
 }
@@ -145,6 +149,14 @@ p {
 /* Book Management Section */
 h3 {
   margin-top: 0;
+}
+
+.chart{
+  background-color: #ffffff8e;
+  padding: 2%;
+  border-radius: 3%;
+  margin-top: 2%;
+  box-shadow: 2px 2px 1px 1px #00000057;
 }
 
 /* User Management Section */

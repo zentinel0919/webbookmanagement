@@ -3,6 +3,7 @@
 <html>
 <head>
   <title>Book Details</title>
+  <link rel="stylesheet" href="./css/admin.css">
   <style>
     /* Add your custom styles here */
 
@@ -10,6 +11,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      background-image: url('/assets/webbg.jpg');
     }
 
     .container {
@@ -49,7 +51,7 @@
       margin-top: 20px;
     }
 
-    header {
+  header {
   background-color: #333;
   color: #fff;
   padding: 20px;
@@ -72,6 +74,7 @@ footer {
     bottom: 0;
   }
 
+  
 nav ul li {
   display: inline;
   margin-right: 10px;
@@ -109,6 +112,8 @@ h3 {
       </ul>
     </nav>
   </header>
+  <main>
+    <section>
   <div class="container">
     <img class="book-image" src="/assets/images/<%= book.image %>" alt="Book Image">
     <div class="book-details">
@@ -119,7 +124,8 @@ h3 {
       <a class="go-back-link" href="/directory">Go Back to Home</a>
     </div>
   </div>
-
+</main>
+  </section>
   <footer>
     &copy; 2023 Admin Dashboard
   </footer>

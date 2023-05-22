@@ -2,16 +2,18 @@
 <html>
 <head>
   <title>User Directory</title>
-  <link rel="stylesheet" href="./css/admin.css">
   <style>
 
 /* Global Styles */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-image: url("assets/webbg.jpg");
   }
   
+
   header {
     background-color: #333;
     color: #fff;
@@ -21,6 +23,8 @@ body {
   
   h1, h2, h3 {
     margin: 0;
+    color: #fefefe;
+  text-shadow: 5px 5px 2px #333;
   }
   
   nav ul {
@@ -79,16 +83,6 @@ body {
     margin-top: 0;
   }
   
-  /* User Management Section */
-  /* admin.css */
-
-/* Global Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
 
 h1,
 h2,
@@ -155,7 +149,7 @@ h3 {
   width: calc(48% - 10px);
   display: flex;
   align-items: center;
-  background-color: #00ffd957;
+  background-color: #ffffffcb;
   border-radius: 5px;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
@@ -173,6 +167,24 @@ h3 {
   object-fit: contain;
 }
 
+
+#searchInput {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+    }
+
+    #searchInput::placeholder {
+      color: #999;
+    }
+
+    #searchInput:focus {
+      outline: none;
+      border-color: #0066cc;
+      box-shadow: 0 0 5px #0066cc;
+    }
 
     .book-title {
       font-weight: bold;
@@ -199,7 +211,7 @@ h3 {
 	  </header>
     <main>
       <section>
-  <h2>Book List</h2>
+  <h2>Book List</h2><br>
   <input type="text" id="searchInput" placeholder="Search by title or author" onkeyup="filterBooks()">
   <div class="book-list">
     <% books.forEach(function(book) { %>
@@ -213,7 +225,7 @@ h3 {
             </p>
           <p class="book-author">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author: <%= book.author %></p>
           <p class="book-genre">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Genre: <%= book.genre %></p>
-          <button class="favorite-button" onclick="addToFavorite('<%= book.id %>')">
+          <button class="favorite-button"  onclick="addToFavorite('<%= book.id %>')">
             <i class="favorite-icon">Add</i>
         </div>
       </div>
@@ -221,6 +233,7 @@ h3 {
   </div>
 
   <script>
+
         function filterBooks() {
           const input = document.getElementById('searchInput');
           const filter = input.value.toLowerCase();
@@ -241,6 +254,7 @@ h3 {
 
     function addToFavorite(bookId) {
       // Send an AJAX request to the server to add the book to the user's favorite list
+
       fetch('/user/favorite', {
         method: 'POST',
         headers: {
@@ -251,7 +265,7 @@ h3 {
         .then((response) => response.json())
         .then((data) => {
           console.log('Book added to favorite list:', data);
-          // You can update the UI or display a success message here
+        
         })
         .catch((error) => {
           console.error('Error adding book to favorite list:', error);
