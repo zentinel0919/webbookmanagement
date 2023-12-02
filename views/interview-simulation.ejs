@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/interview.css">
+    <title>Interview Simulation</title>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+            </div>
+            <ul class="nav-items">
+                <li class="nav-item">
+                    <a class="navtext" href="/directory">HOME</a>
+                    <div class="dropdown-content">
+                        <a href="/directory#About-Us">About Us</a>
+                        <a href="/directory#Contact-Us">Contact Us</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="navtext" href="#">SERVICES</a>
+                    <div class="dropdown-content">
+                        <a href="/counseling">Counseling</a>
+                        <a href="/ojt-search">OJT Search</a>
+                        <a href="/interview">Interview Simulation</a>
+                        <a href="/builder">Builder</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="navtext" href="/user/profile">PROFILE</a></li>
+                <li class="nav-item"><a class="navtext" href="/logout">LOGOUT</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="crop-container">
+        <img class="image-design" src="/assets/interview2.jpg">
+      </div>
+    <div class="interview-section">
+    <h1>Interview Simulation</h1>
+    <span class="description">Welcome to the T.I.P. Career Center's Interactive Interview Simulation!
+        Embark on a journey to confidence with our state-of-the-art interview simulation, 
+        designed exclusively for the ambitious students of the Technological Institute of the Philippines. 
+        Sharpen your communication skills, practice your responses, and prepare to make a stellar 
+        impression in the professional world.</span>
+        <div class="interaction-container"> <!-- Add this wrapper -->
+            <div class="animation">
+                <img id="avatar-image" src="/assets/animation/Normal.png" alt="Avatar"/>
+            </div>
+            <div class="chat-wrapper"> <!-- Add this wrapper -->
+                <div class="chatbot-header">Interviewer (BOT)</div>
+                <div class="chat-container" id="chat-container"></div>
+            </div>
+        </div>
+    <div class="interview-form">
+        <form id="interview-form">
+            <textarea type="text" id="user-prompt" autocomplete="off"></textarea>
+            <div class="buttons-container">
+                <button type="submit">Send</button>
+                <button type="button" id="micButton" onclick="startDictation()">Mic 🎙</button>
+                <button type="button" id="repeatButton" onclick="repeatLastMessage()">Repeat</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<div id="response"></div>
+</body>
+
+<script src="/js/interview-simulation.js" defer></script>
+
+</html>

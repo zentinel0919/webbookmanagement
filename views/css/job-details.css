@@ -1,0 +1,399 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px; /* Width of the vertical scrollbar */
+    height: 8px; /* Height of the horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0.3); /* Color of the track with reduced opacity */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.5); /* Color of the scroll thumb with reduced opacity */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(85, 85, 85, 0.7); /* Color of the scroll thumb on hover with reduced opacity */
+}
+  
+  body {
+    background-image: linear-gradient(
+        rgba(34, 34, 34, -0.4),
+        rgba(34, 34, 34, -2.4)
+    ), url('/assets/Background2.png');
+    background-size: cover;
+    font-family: sans-serif;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+  
+.nav {
+  background-color: #ffd43b;
+  display: flex;
+  justify-content: space-between; /* This will push the logo to the left and nav-items to the right */
+  align-items: center; /* This will vertically center the items */
+  padding: 30px;
+  box-shadow: 0px 0px 8px 2px rgba(58, 57, 57, 0.582);
+}
+
+.nav-logo img {
+  max-width: 100%;
+  width: 13.8rem;
+  height: auto;
+  position: absolute;
+  top: 0;
+  margin-left: 5%;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.199);
+}
+
+.nav-items {
+  display: flex;
+  justify-content: flex-end; /* This will push the navtext to the right */
+  align-items: center; /* This will vertically center the items */
+  height: 100%; /* This will make the nav-items take the full height of the nav bar */
+}
+
+li {
+    list-style: none;
+}
+
+.navtext:link, a:visited {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+.navtext:active, .navtext:hover, .dropdown:hover .dropbtn  {
+    background-color: #5683ec;
+    color: #fff;
+    border-radius: 90px;
+    transition: all 0.3s;
+    font-size: larger;
+    box-shadow: 0px 5px 5px 0px black;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+
+  
+  .dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: rgb(0, 0, 0);
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 10px;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: rgb(17, 17, 17);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    transition: .5s;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .job-header {
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.job-title {
+    font-size: 28px;
+    color: #222222;
+    margin-bottom: 10px;
+}
+
+.job-company {
+    font-size: 18px;
+    color: #555;
+}
+
+.job-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #3a3939;
+}
+
+
+.go-back-link:hover {
+    background-color: #313130;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    height: 3.1rem;
+    transition: 0.2s;
+}
+
+.job-actions {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: flex-end;
+  margin-top: 30px;
+  column-gap: 1%;
+}
+
+.apply-button,
+.save-button,
+.go-back-link {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 10rem;
+}
+
+@media screen and (max-width: 50rem) {
+  .nav {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .job-actions {
+      grid-template-columns: 1fr;
+      margin: 1%;
+      justify-content: space-between;
+  }
+}
+
+.apply-button {
+  background-color: #333;
+  color: #fff;
+  height: 3rem;
+}
+
+.apply-button:hover {
+  background-color: #313130;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  height: 3.1rem;
+  transition: 0.2s;
+}
+
+.save-button {
+  background-color: #353535;
+  color: #ffffff;
+  border: 1px solid #333;
+  height: 3rem;
+}
+
+.save-button:hover {
+  background-color: #313130;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  height: 3.1rem;
+  transition: 0.2s;
+}
+
+
+.go-back-link {
+  background-color: #353535;
+  color: #ffffff;
+  border: 1px solid #333;
+  height: 3rem;
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  overflow: auto;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 40px;
+  border: 1px solid #888;
+  width: 70%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.19);
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: -20px -20px 0 0;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@keyframes slideIn {
+  from {top: -400px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+/* Styling the form elements */
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 20px;
+}
+
+.modal-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.modal-content label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.modal-content input[type="file"] {
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.modal-content button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+  background-color: #45a049;
+}
+
+.consent-container {
+  margin-bottom: 20px;
+}
+
+.consent-container label {
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.consent-container input[type="checkbox"] {
+  vertical-align: middle;
+}
+
+.consent-container a {
+  color: #007BFF;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.consent-container a:hover {
+  color: #0056b3;
+}
+
+#submitBtn {
+  background-color: #2e2f30;  /* Default blue color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+#submitBtn:disabled {
+  background-color: #CCCCCC;  /* Gray color */
+  color: #888888;
+  cursor: not-allowed;
+}

@@ -1,240 +1,234 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/profile.css">
   <title>Edit Profile</title>
-  <style>
-    form {
-      background-color: #fefefe;
-        margin: 8% auto;
-        padding: 4%;
-        border: 1px solid #888;
-        width: 40%;
-        background-position-y: 35%;
-        background-position-x: 35%;
-        background-repeat: no-repeat;
-        backdrop-filter: blur(20px);
-        background-size: auto;
-        box-shadow: 0px 0px 5px 1px rgb(0, 0, 0);
-        border-radius: 5%;
-        z-index: 999;
-    }
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    input[type="text"],
-    select {
-      width: 70%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      margin-bottom: 10px;
-    }
-
-    select {
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23333' d='M7.5 10l5-5 5 5H7.5z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      background-size: 12px;
-    }
-
-
-    input[type="file"] {
-      margin-bottom: 10px;
-    }
-
-    button[type="submit"] {
-      background-color: #333;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-
-    /* Responsive Styles */
-    @media screen and (max-width: 768px) {
-      .book-item {
-        width: 100%;
-      }
-    }
-
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url("/assets/webbg.jpg");
-    backdrop-filter: blur(20px);
-  }
-  
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      margin-bottom: 2.5%;
-      box-shadow: 2px 2px 1px 1px #00000057;
-    }
-  
-    h1, h2, h3 {
-      margin: 0;
-    }
-  
-    nav ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-  
-    nav ul li {
-      display: inline;
-      margin-right: 10px;
-    }
-  
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-    }
-  
-  
-    section {
-      margin-bottom: 20px;
-    }
-  
-    footer {
-      background-color: #333;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-      position: relative;
-      width: 100%;
-      bottom: 0;
-      margin-top: 5%;
-    }
-  
-    /* Admin Dashboard Specific Styles */
-    h2 {
-      margin-top: 0;
-    }
-  
-    a {
-      color: #0066cc;
-    }
-  
-    a:hover {
-      text-decoration: underline;
-    }
-  
-    p {
-      line-height: 1.5;
-    }
-  
-    /* Edit User Form Styles */
-    form {
-      max-width: 400px;
-      margin: 0 auto;
-    }
-  
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
-  
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 8px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      margin-bottom: 10px;
-    }
-  
-    button[type="submit"] {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  
-    button[type="submit"]:hover {
-      background-color: #45a049;
-    }
-    
-    /* User Icon Styles */
-    .user-icon {
-      display: inline-block;
-      width: 80px;
-      height: 80px;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      margin-bottom: 10px;
-      text-align: center;
-      margin-left: 40%;
-    }
-    
-    .male-icon {
-      background-image: url("/assets/male.png"); /* Replace with the actual male icon URL */
-    }
-    
-    .female-icon {
-      background-image: url("/assets/female.png"); /* Replace with the actual female icon URL */
-    }
-  </style>
 </head>
 <body>
-    <header>
-        <h1>Edit Profile</h1>
-        <nav>
-          <ul>
-            <li><a href="/directory">Home</a></li>
-            <li><a href="/user/favorites">Favorite</a></li>
-            <li><a href="/user/profile">Profile</a></li>
-            <li><a href="/logout">Logout</a></li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <section>
-  <form action="/profile" method="POST">
-    <div class="user-icon <% if (user.gender === 'male') { %>male-icon<% } else if (user.gender === 'female') { %>female-icon<% } %>"></div>
-    <div>
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" value="<%= user.username %>" required>
+
+  <% if (user.isAdmin) { %>
+    <nav>
+      <ul class="nav">
+        <li class="nav-logo">
+          <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+      </li>
+      <div class="nav-items">
+          <li><div class="dropdown"><a class="navtext" href="/directory">
+            DASHBOARD
+            </a>
+            <div class="dropdown-content">
+          <a href="/admin/homepage">Hompage Components</a>
+            </div>
+          </div>
+          </li>
+          <li><div class="dropdown"><a class="navtext" href="#">
+            SERVICES
+            </a>
+            <div class="dropdown-content">
+              <a href="/counseling">Counseling</a>
+              <a href="/admin/job">Manage OJT</a>
+            </div>
+          </div>
+          </li>
+          <li><a class="navtext" href="/user/profile">Profile</a></li>
+          <li><a class="navtext" href="/logout">Logout</a></li>
+          </div>
+      </ul>
+  </nav>
+  <% } else { %>
+    <nav>
+      <ul class="nav">
+        <li class="nav-logo">
+          <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+      </li>
+      <div class="nav-items">
+          <li><div class="dropdown"><a class="navtext" href="/directory">
+            HOME
+            </a>
+            <div class="dropdown-content">
+          <a href="#About-Us">About Us</a>
+          <a href="#Contact-Us">Contact Us</a>
+            </div>
+          </div>
+          </li>
+          <li><div class="dropdown"><a class="navtext" href="#">
+            SERVICES
+            </a>
+            <div class="dropdown-content">
+              <a href="/counseling">Counseling</a>
+              <a href="/ojt-search">OJT Search</a>
+              <a href="/interview">Interview Simulation</a>
+              <a href="/builder">Builder</a>
+            </div>
+          </div>
+          </li>
+          <li><a class="navtext" href="/user/profile">Profile</a></li>
+          <li><a class="navtext" href="/logout">Logout</a></li>
+          </div>
+      </ul>
+  </nav>
+  <% } %>
+
+<main>
+  <section class="profile-section">
+    <div class="user-details">
+      <div class="user-icon">
+        <img src="<%= user.profilePic ? user.profilePic : '/assets/male.png' %>" alt="User Profile Picture" class="profile-pic">
+      </div>
+      <form action="/user/uploadProfilePic" method="post" enctype="multipart/form-data">
+        <input type="file" name="profilePic" required>
+        <button type="submit">Upload</button>
+      </form>
+      <br>
+      <div>
+        <label>Username: <%= user.username %></label>
+      </div>
+      <div>
+        <label>Email: <%= user.email %></label>
+      </div>
+      <div>
+        <label>Phone: <%= user.phone %></label>
+      </div>
+      <div>
+        <label>Gender: <%= user.gender %></label>
+      </div>
+      <div>
+        <label>Program: <%= user.program %></label>
+      </div>
+      <!-- Add more user details as needed -->
+      <button class="editProfileBtn" id="editProfileBtn">Edit Profile</button>
     </div>
-    <div>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" value="<%= user.email %>" required>
+  
+    <div class="favorite-jobs">
+  <h2>Saved Job List</h2>
+  <div class="job-list">
+    <% if (favoriteJobs && favoriteJobs.length > 0) { %>
+      <% favoriteJobs.forEach(function(favoriteJob, index) { %>
+        <div class="job-item">
+          <div class="job-info">
+            <a class="job-title-link" href="/ojt-search"><%= favoriteJob.job.title %></a>
+            <p class="job-company">Company: <%= favoriteJob.job.company %></p>
+            <p class="job-program">Program: <%= favoriteJob.job.program %></p>
+            <form id="removeFavoriteForm<%= index %>" action="/user/profile" method="POST">
+              <input type="hidden" name="userId" value="<%= favoriteJob.userId %>">
+              <input type="hidden" name="jobId" value="<%= favoriteJob.jobId %>">
+              <button type="submit" data-index="<%= index %>" class="remove-favorite-button"><i class="favorite-icon">Remove</i></button>
+            </form>
+          </div>
+        </div>
+      <% }); %>
+    <% } else { %>
+      <p>No favorite jobs found.</p>
+    <% } %>
+  </div>
+</div>
+
+
+
+
+  <div id="editProfileModal" class="modal">
+    <div class="modal-content">
+      <h2>Edit Profile</h2>
+      <span class="modal-close" onclick="closeEditProfileModal()">&times;</span>
+      <form action="/profile" method="POST">
+        <img src="<%= user.profilePic ? user.profilePic : '/assets/male.png' %>" alt="User Profile Picture" class="profile-pic">
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" value="<%= user.username %>" required>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" value="<%= user.email %>" required>
+        </div>
+        <div>
+          <label for="phone">Phone:</label>
+          <input type="text" id="phone" name="phone" value="<%= user.phone %>" required>
+        </div>
+        <div>
+          <label for="password">Current Password:</label>
+          <input type="password" id="password" name="password" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
+        </div>
+        <div>
+          <label for="newPassword">New Password:</label>
+          <input type="password" id="newPassword" name="newPassword" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
+        </div>
+        <div>
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
+        </div>
+        <div>
+          <button type="submit">Save Changes</button>
+        </div>
+      </form>
     </div>
-    <div>
-      <label for="password">Current Password:</label>
-      <input type="password" id="password" name="password" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
-    </div>
-    <div>
-      <label for="newPassword">New Password:</label>
-      <input type="password" id="newPassword" name="newPassword" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
-    </div>
-    <div>
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" id="confirmPassword" name="confirmPassword"  required>
-    </div>
-    <div>
-      <button type="submit">Save Changes</button>
-    </div>
-  </form>
-</main>
-</section>
-  <footer>
-    <p>&copy; 2023 User. All rights reserved.</p>
-  </footer>
+  </div>
+
+      </section>
+
+<script>
+const removeFavoriteButtons = document.querySelectorAll('.remove-favorite-button');
+
+removeFavoriteButtons.forEach(button => {
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const index = this.getAttribute('data-index'); // Get the index from data-index attribute
+
+    const form = document.getElementById(`removeFavoriteForm${index}`);
+    const userId = form.querySelector('input[name="userId"]').value;
+    const jobId = form.querySelector('input[name="jobId"]').value;
+
+    fetch(`/user/profile?userId=${userId}&jobId=${jobId}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Job removed from favorite list:', data);
+        // You can update the UI or display a success message here
+
+        // Reload the page after a successful removal
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error('Error removing job from favorite list:', error);
+        // Handle the error and display an error message if necessary
+      });
+  });
+});
+
+
+
+      // Show modal when "Edit Profile" button is clicked
+      const editProfileBtn = document.getElementById('editProfileBtn');
+    const editProfileModal = document.getElementById('editProfileModal');
+    const closeModal = document.getElementById('closeModal');
+
+    editProfileBtn.addEventListener('click', () => {
+      editProfileModal.style.display = 'block';
+    });
+
+    closeModal.addEventListener('click', () => {
+      editProfileModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+      if (event.target === editProfileModal) {
+        editProfileModal.style.display = 'none';
+      }
+    });
+
+    function openEditProfileModal() {
+      document.getElementById('editProfileModal').style.display = 'block';
+    }
+
+    function closeEditProfileModal() {
+      document.getElementById('editProfileModal').style.display = 'none';
+    }
+
+</script>
 </body>
 </html>

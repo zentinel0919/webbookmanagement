@@ -2,6 +2,9 @@
 <html>
 <head>
   <title>Edit User</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/admin.css">
   <style>
     /* Global Styles */
     body {
@@ -21,22 +24,7 @@
       margin: 0;
     }
   
-    nav ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-
-
-    nav ul li {
-      display: inline;
-      margin-right: 10px;
-    }
   
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-    }
   
     main {
       margin: 20px;
@@ -61,13 +49,6 @@
       margin-top: 0;
     }
   
-    a {
-      color: #0066cc;
-    }
-  
-    a:hover {
-      text-decoration: underline;
-    }
   
     p {
       line-height: 1.5;
@@ -110,16 +91,17 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>Edit User</h1>
-    <nav>
-      <ul>
-        <li><a href="/admin/book">Book Management</a></li>
-        <li><a href="/admin/users">User Management</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
+
+  <nav>
+    <ul class="nav">
+      <li><a class="navtext" href="/directory">Dashboard</a></li>
+      <li><a class="navtext" href="/user/profile">Profile</a></li>
+      <li><a class="navtext" href="/counseling">Counseling</a></li>
+      <li><a class="navtext" href="/admin/job">Manage OJT</a></li>
+      <li><a class="navtext" href="/admin/users">Manage Users</a></li>
+      <li><a class="navtext" href="/logout">Logout</a></li>
+    </ul>
+  </nav>
   
   <main>
     <form action="/admin/user/edit/<%= user.id %>" method="POST">

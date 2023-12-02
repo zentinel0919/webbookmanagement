@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WELCOME</title>
+    <title>Career Center</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-pzjw8h0y7pj4+1d9pzs33+j8hkpz8d+qy4+qn7wh2+kfzc0okg6do+8mtyia5hf6" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
 
@@ -120,48 +118,25 @@
       });
     });
   });
+
+document.getElementById('phoneInput').addEventListener('keydown', function(e) {
+    if (!isNumberKey(e)) {
+        e.preventDefault();
+    }
+});
+
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
   
     </script>
 
     <style>
-
-
-
-.btn {
-  position: relative;
-  overflow: hidden;
-  padding: 10px 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
-  border: none;
-  cursor: pointer;
-  z-index: 1;
-}
-
-.btn-text {
-  position: relative;
-  z-index: 2;
-}
-
-.btn-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(56, 199, 175);
-  transform-origin: left center;
-  transform: scaleX(0);
-  transition: transform 0.3s ease-out;
-  z-index: 1;
-}
-
-.btn:hover .btn-background {
-  transform-origin: right center;
-  transform: scaleX(1);
-}
-
 
 
       /* Modal styles */
@@ -174,47 +149,18 @@
         width: 100%;
         height: 100%;
         overflow: auto;
-        text-align: center;
-        background-color: #1a1717a1;
+        background-color: #111110af;
+        backdrop-filter: blur(5px);
       }
 
-      .modal-content-login {
-        background-color: #fefefe;
-        margin: 8% auto;
-        padding-right: 10%;
-        padding-left: 10%;
-        border: 1px solid #888;
-        width: 40%;
-        background-position-y: 35%;
-        background-position-x: 35%;
-        background-repeat: no-repeat;
-        background-size: auto;
-        box-shadow: 0px 0px 5px 1px rgb(0, 0, 0);
-        border-radius: 5%;
-        z-index: 999;
-      }
-
-      .modal-content-register {
-        background-color: #fefefe;
-        margin: 4% auto;
-        padding-right: 10%;
-        padding-left: 10%;
-        border: 1px solid #888;
-        width: 40%;
-        background-position-y: 35%;
-        background-position-x: 35%;
-        background-repeat: no-repeat;
-        background-size: auto;
-        box-shadow: 0px 0px 5px 1px rgb(0, 0, 0);
-        border-radius: 5%;
-        z-index: 999;
-      }
 
       .close {
         color: #1a1717;
         float: right;
         font-size: 28px;
         font-weight: bold;
+        position: absolute;
+        
       }
 
       .close:hover,
@@ -224,150 +170,129 @@
         cursor: pointer;
       }
 
-      
-      .border-container {
-      border: 1px solid #ccc;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 600px;
-    }
+.direct-login {
+  visibility: hidden;
 
-    .button-container {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-       
-  .homie{
-    margin-top: 2%;
-    font-size: 500%;
-    margin-bottom: 2%;
-    color: rgb(39, 38, 23);
-    text-shadow: 5px 5px 5px #a3a5a4;
-  }
-
-.logo{
-  width: 20%;
-  height: 20%;
-}
-
-.contents{
-  background-color: #ffffff;
-  padding: 7%;
-  width: 80%;
-  top: 4%;
-  height: 75%;
-  margin-left: 10%;
-  margin-top: 2%;
-  border-radius: 4%;
-  position: absolute;
-}
-
- .ribon{
-  position: absolute;
-  height: 50%;
-  width: 40%;
-  z-index: 1;
-  right: -5%;
-  top: -7.2%;
- }
- 
-.form-control{
-  border-bottom: 2px solid rgb(46, 46, 46);
-}
-.inputs input{
-  border: none;
-  background: transparent;
-  outline: none;
-  border-bottom: 2px solid rgb(46, 46, 46);
 }
 
 
     </style>
   </head>
   <body>
+
     <div class="mssg bg-danger">
       <span id="check"></span>
       </div>
-    <div class="contents">
-      <img class="ribon" src="assets/ribon.png">
-      <div class="leftbox">
-      </div>
-      <label class="homie">Book Management</label>
-        <div class="button-container">
-          <button class="btn btn-success login" onclick="document.getElementById('Login-modal').style.display='block'">
-            <span class="btn-text">Login</span>
-            <span class="btn-background"></span>
-          </button>
-          <button class="btn btn-success register" onclick="document.getElementById('Register-modal').style.display='block'">
-            <span class="btn-text">Register</span>
-            <span class="btn-background"></span>
-          </button>
+
+      <div class="width">
+
+        <div class="container">
+            <div class="yellow">
+                <img src="/assets/CareerCenter.png" class="tip-logo" alt="TIP Logo">
+                <button class="btn btn-success login" onclick="document.getElementById('Login-modal').style.display='block'">
+                <label class="modalbtn"> Log in </label>
+                </button>
+                <button class="btn btn-success register" onclick="document.getElementById('Register-modal').style.display='block'">
+                  <label class="modalbtn"> Register </label>
+                </button>
+            </div>
+        <div class="black">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="search-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+              </svg>
+              
         </div>
-      </div>
-        
+    </div>
+</div>
+
         <!-- Modal -->
         <div id="Login-modal" class="modal">
           <div class="modal-content-login">
+            <div class="form-container">
             <span class="close" onclick="document.getElementById('Login-modal').style.display='none'">&times;</span>
-            <div>
-              <p>&nbsp&nbsp Login
-                <img class="spinner" src="assets/spinner2.gif">
-              </p>
+              <div class="form-header">
+                <img src="/assets/image2.png" alt="Your Logo">
             </div>
-            <div class="form-group">
-              <div class="inputs">
               <form id="form" method="post">
+                <div class="input-icon">
+                  <i class="fas fa-envelope"></i>
                 <input type="text" name="email" placeholder="E-mail" required="" class="form-control"><br />
+              </div>
+              <div class="input-icon">
+                <i class="fas fa-lock"></i>
                 <input type="password" id="password" name="password" placeholder="Password" required="" class="form-control"><br />
               </div>
-                <input type="submit" value="Login" class="btn btn-success">
+              
+                <center><input type="submit" value="Login" class="register-btn"></center>
+                </div>
               </form>
             </div>
             </div>
-            <div id="LangTable">
+            </div>
+            <div class="direct-login" id="LangTable">
               <a href="/directory" id="aa"></a>
             </div>
           </div>
-        </div>
         
 
         <div id="Register-modal" class="modal">
           <div class="modal-content-register">
-            <span class="close" onclick="document.getElementById('Register-modal').style.display='none'">&times;</span>
-            <div>
-              <p>&nbsp&nbsp Register Now
-                <img class="spinner" src="assets/spinner2.gif">
-              </p>
-            
-            </div>
-            <div class="form-group">
-              <div class="inputs">
+            <div class="form-container">
+              <span class="close" onclick="document.getElementById('Register-modal').style.display='none'">&times;</span>
+              <div class="form-header">
+                  <img src="/assets/image2.png" alt="Your Logo">
+              </div>
               <form id="form1" method="post">
+                <div class="input-icon">
+                  <i class="fas fa-envelope"></i>
                 <input type="email" name="email" placeholder="E-mail" required="" class="form-control"><br />
+                </div>
+                <div class="input-icon">
+                  <i class="fas fa-user"></i>
                 <input type="text" name="username" placeholder="Username" required="" class="form-control"><br />
-                <select class="form-control" name="gender" id="gender" required="">
+                </div>
+                <div class="input-icon">
+                  <i class="fas fa-user"></i>
+                <input type="text" name="phone" id="phoneInput" placeholder="Phone Number" required="" class="form-control"><br />
+                </div>
+                <div class="input-icon">
+                  <i class="fas fa-venus-mars"></i>
+                <select class="select-control" name="gender" id="gender" required="">
                   <option value="">Select Gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
+                  <option value="Prefer-not-to-say">Prefer not to say</option>
                 </select><br />
-                <input type="password" id="password" name="password" placeholder="Password" required="" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" class="form-control"><br />
-                <input type="password" name="passwordConf" placeholder="Confirm Password" required="" class="form-control"><br />
               </div>
-                <input type="submit" value="Register" class="btn btn-success">
+              <div class="input-icon">
+                <i class="fas fa-graduation-cap"></i>
+                <select class="select-control" name="program" id="program" required="">
+                  <option value="">Select Program</option>
+                  <option value="Business Education">Business Education</option>
+                  <option value="Arts">Arts</option>
+                  <option value="Engineering & Architecture">Engineering & Architecture</option>
+                  <option value="Computer Studies">Computer Studies</option>
+                </select><br />
+                </div>
+                <div class="input-icon">
+                  <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="Password" required="" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" class="form-control"><br />
+              </div>
+              <div class="input-icon">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="passwordConf" placeholder="Confirm Password" required="" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" class="form-control"><br />
+              </div>
+              <center><input type="submit" value="Register" class="register-btn"></center>
+            </div>
               </form>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <footer>
-      &copy; 2023 CBS. All rights reserved.
-    </footer>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></script>
+    <footer>
+      <p>&copy; 2023 Capstone</p>
+    </footer>
   </body>
   </html>

@@ -1,0 +1,458 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/assets/Background2.png');
+  }
+  
+  
+  main {
+    margin: 20px;
+  }
+  
+  section {
+    margin-bottom: 20px;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+  }
+  
+
+  p {
+    line-height: 1.5;
+  }
+
+  
+
+main {
+  margin: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+/* Admin Dashboard Specific Styles */
+h2 {
+  margin-top: 0;
+  color: rgb(181, 245, 33);
+  text-shadow: 5px 5px 2px #333;
+}
+
+p {
+  line-height: 1.5;
+}
+
+/* Book Management Section */
+h3 {
+  margin-top: 0;
+}
+
+.book-management{
+  color: #030303;
+  text-shadow: 1px 1px 2px #333;
+  box-shadow: 2px 2px 5px 1px #333;
+  background-color: #ffd43b;
+  backdrop-filter: blur(2px);
+  width: fit-content;
+  padding: 1%;
+  border-radius: 5px;
+}
+
+.del-book{
+  color: #fefefe;
+  text-shadow: 5px 5px 2px #333;
+}
+
+/* User Management Section */
+
+.book-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .job-item {
+  width: calc(50% - 10px);
+  display: flex;
+  align-items: center;
+  background-color: #ffffffcb;
+  border-radius: 5px;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 1%;
+}
+
+#searchInput {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+    }
+
+    #searchInput::placeholder {
+      color: #999;
+    }
+
+    #searchInput:focus {
+      outline: none;
+      border-color: #0066cc;
+      box-shadow: 0 0 5px #0066cc;
+    }
+
+.book-image {
+  width: 100px; /* Adjust the width as desired */
+  height: 100px; /* Adjust the height as desired */
+}
+
+.book-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+
+    .job-title {
+      font-weight: bold;
+    }
+
+    .job-program {
+      margin-top: 5px;
+      color: #666;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    select {
+      width: 70%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23333' d='M7.5 10l5-5 5 5H7.5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 12px;
+    }
+
+
+    input[type="file"] {
+      margin-bottom: 10px;
+    }
+
+    button[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      box-shadow: 2px 2px 1px 1px #00000057;
+    }
+
+    /* Responsive Styles */
+    @media screen and (max-width: 768px) {
+      .job-item {
+        width: 100%;
+      }
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-content-add {
+        background-color: #fefefe;
+        margin: 8% auto;
+        padding: 4%;
+        border-radius: 10px;
+        border: 1px solid #888;
+        width: 60%;
+        background-position-y: 1%;
+        background-position-x: 35%;
+        background-repeat: no-repeat;
+        background-size: auto;
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.308);
+      }
+
+      .modal-content-edit {
+        background-color: #fefefe;
+        margin: 4% auto;
+        padding: 2%;
+        border: 1px solid #888;
+        width: 60%;
+        border-radius: 10px;
+        background-position-y: 35%;
+        background-position-x: 35%;
+        background-repeat: no-repeat;
+        background-size: auto;
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.308);
+      }
+
+      .close {
+        color: #1a1717;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: rgb(68, 32, 32);
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .add {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      box-shadow: 2px 2px 1px 1px #00000057;
+      }
+
+      .edit {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      box-shadow: 2px 2px 1px 1px #00000057;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      .map {
+        width: 100%;
+        height: 500px;
+        position: relative;
+      }
+      
+      
+      ::-webkit-scrollbar {
+        width: 8px; /* Width of the vertical scrollbar */
+        height: 8px; /* Height of the horizontal scrollbar */
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: rgba(241, 241, 241, 0.3); /* Color of the track with reduced opacity */
+        border-radius: 5px;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: rgba(136, 136, 136, 0.5); /* Color of the scroll thumb with reduced opacity */
+        border-radius: 5px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(85, 85, 85, 0.7); /* Color of the scroll thumb on hover with reduced opacity */
+      }
+      
+
+      
+      .nav {
+        background-color: #ffd43b;
+        display: flex;
+        justify-content: space-between; /* This will push the logo to the left and nav-items to the right */
+        align-items: center; /* This will vertically center the items */
+        padding: 30px;
+        box-shadow: 0px 0px 8px 2px rgba(58, 57, 57, 0.582);
+      }
+      
+      .nav-logo img {
+        max-width: 100%;
+        width: 13.8rem;
+        height: auto;
+        position: absolute;
+        top: 0;
+        margin-left: 5%;
+        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.199);
+      }
+      
+      .nav-items {
+        display: flex;
+        justify-content: flex-end; /* This will push the navtext to the right */
+        align-items: center; /* This will vertically center the items */
+        height: 100%; /* This will make the nav-items take the full height of the nav bar */
+      }
+      
+      
+      li {
+        list-style: none;
+      }
+      
+      
+      .navtext:active, .navtext:hover, .dropdown:hover .dropbtn  {
+        background-color: #5683ec;
+        color: #fff;
+        border-radius: 90px;
+        transition: all 0.3s;
+        font-size: larger;
+        box-shadow: 0px 5px 5px 0px black;
+        text-decoration: none;
+      }
+      
+      
+      .dropdown {
+        float: left;
+        overflow: hidden;
+      }
+      
+      
+      .dropdown .dropbtn {
+        font-size: 16px;  
+        border: none;
+        outline: none;
+        color: rgb(0, 0, 0);
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+        font-weight: bold;
+      }
+      
+      
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 10px;
+      }
+      
+      .dropdown-content a {
+        float: none;
+        color: rgb(17, 17, 17);
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        transition: .5s;
+      }
+      
+      .dropdown-content a:hover {
+        background-color: #ddd;
+      }
+      
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      
+      .charts{
+        background-color: #000;
+      }
+      
+      .navtext:link, a:visited {
+          text-decoration: none;
+          text-transform: uppercase;
+          color: #000;
+          font-weight: bold;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 30px;
+          padding-left: 20px;
+          padding-right: 20px;
+      }
+      
+      .p-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 23px;
+        align-content: center;
+        text-align: center;
+      }
+      
+      .gif-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        filter: drop-shadow(0.35rem 0.50rem .35rem rgb(0, 0, 0));
+      
+      }
+      
+      .width {
+        width: 1300px;
+        margin: 0 auto;
+        margin-top: -4%;
+      }
+      
+      .job-title-link{
+        text-decoration: none;
+        font-size: 120%;
+        font-weight:600;
+        color: #000;
+      }
+      
+      .job-title-link:hover{
+        text-decoration: none;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        transition: .2s;
+        border-radius: 20px;
+        color: rgb(175, 175, 241);
+      }
+
+
+      .leaflet-control-geocoder {
+        background-color: #000;
+      }
+      
+      .leaflet-control-geocoder input {
+        width: 40rem;
+      }
+      
+      .leaflet-control-geocoder a {
+        color: black;
+      }
+      
+      .description-textarea{
+        background-color: rgb(234, 237, 241);
+        border-radius: 10px;
+        box-shadow: 1px 1px 5px 1px rgba(128, 128, 128, 0.281);
+        margin-bottom: 1%;
+        white-space: pre-wrap;
+      }

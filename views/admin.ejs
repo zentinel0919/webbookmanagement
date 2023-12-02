@@ -1,67 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  
+
   <title>Admin Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/admin.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Welcome, Admin!</h1>
-    <nav>
-      <ul>
-        <li><a href="/directory">Dashboard</a></li>
-        <li><a href="/admin/book">Book Management</a></li>
-        <li><a href="/admin/users">User Management</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <h2>Admin Dashboard</h2>
-    <section>
-      <br>
-      This chart contains the number of users and the number of books recorded
-      <canvas class="chart" id="chart" data-user-count="<%- userCount %>" data-book-count="<%- bookCount %>"></canvas>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2023 Admin Dashboard. All rights reserved.</p>
-  </footer>
+
+  <nav>
+    <ul class="nav">
+      <li class="nav-logo">
+        <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+    </li>
+    <div class="nav-items">
+        <li><div class="dropdown"><a class="navtext" href="/directory">
+          DASHBOARD
+          </a>
+          <div class="dropdown-content">
+        <a href="/admin/homepage">Homepage Components</a>
+          </div>
+        </div>
+        </li>
+        <li><div class="dropdown"><a class="navtext" href="#">
+          SERVICES
+          </a>
+          <div class="dropdown-content">
+            <a href="/counseling">Counseling</a>
+            <a href="/admin/job">Manage OJT</a>
+          </div>
+        </div>
+        </li>
+        <li><a class="navtext" href="/user/profile">Profile</a></li>
+        <li><a class="navtext" href="/logout">Logout</a></li>
+        </div>
+    </ul>
+</nav>
 
   
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var chartElement = document.getElementById('chart');
-      var userCount = parseInt(chartElement.dataset.userCount);
-      var bookCount = parseInt(chartElement.dataset.bookCount);
-  
-      var ctx = chartElement.getContext('2d');
-      var chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Users', 'Books'],
-          datasets: [{
-            label: 'Count',
-            data: [userCount, bookCount],
-            backgroundColor: ['#ff6384', '#36a2eb'],
-            borderColor: ['#2c2a2a', '#2c2a2a'],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true,
-              precision: 0
-            }
-          }
-        }
-      });
-    });
-  </script>
+  <main>
+    <div class="dashboard-container">
+    <h2 class="admin-dashboard-text">Admin Dashboard</h2>
+    <br>
+    <div class="dashboard-description">
+      This contains the data of the activities within the website
+    </div>
+    <section>
+      <br>
+      <div class="chart-container">
+      <iframe style="background: #21313C;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="auto" height="400" src="https://charts.mongodb.com/charts-project-0-prufi/embed/charts?id=652e4a06-66c3-4110-8e6a-2711644741af&maxDataAge=300&theme=dark&autoRefresh=true"></iframe>
+      <iframe style="background: #21313C;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="auto" height="400" src="https://charts.mongodb.com/charts-project-0-prufi/embed/charts?id=652e4bc2-2554-4d38-84c8-902b60212678&maxDataAge=300&theme=dark&autoRefresh=true"></iframe>
+      <iframe style="background: #21313C;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="auto" height="400" src="https://charts.mongodb.com/charts-project-0-prufi/embed/charts?id=652e4c81-ce2e-40c0-863d-1b4aeb2a6453&maxDataAge=300&theme=dark&autoRefresh=true"></iframe>
+      <iframe style="background: #21313C;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="auto" height="400" src="https://charts.mongodb.com/charts-project-0-prufi/embed/charts?id=652e4b59-2554-4903-8ae8-902b6020e7c4&maxDataAge=300&theme=dark&autoRefresh=true"></iframe>
+    </div>
+    </section>
+    </div>
+  </main>
+
+
   
 
 </body>

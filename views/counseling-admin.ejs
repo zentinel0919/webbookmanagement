@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/counseling-admin.css">
+    <title>Counseling Admin</title>
+</head>
+<body>
+
+  <nav>
+    <ul class="nav">
+        <li class="nav-logo">
+            <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+        </li>
+        <div class="nav-items">
+        <li><div class="dropdown"><a class="navtext" href="/directory">
+          DASHBOARD
+          </a>
+          <div class="dropdown-content">
+        <a href="/admin/homepage">Hompage Components</a>
+          </div>
+        </div>
+        </li>
+        <li><div class="dropdown"><a class="navtext" href="#">
+          SERVICES
+          </a>
+          <div class="dropdown-content">
+            <a href="/counseling">Counseling</a>
+            <a href="/admin/job">Manage OJT</a>
+          </div>
+        </div>
+        </li>
+        <li><a class="navtext" href="/user/profile">Profile</a></li>
+        <li><a class="navtext" href="/logout">Logout</a></li>
+        </div>
+    </ul>
+</nav>
+
+<div class="counseling-container">
+<h2 class="admin-dashboard-text">Select Available Dates</h2>
+
+<div class="calendar-available">
+<div class="calendar" id="calendar"></div>
+<div class="available-added">
+<div class="selected-text">Selected Available Dates:</div>
+    <% availableDates.forEach(dateObj => { %>
+      <div class="available-date">
+        <p><%= dateObj.date.toDateString() %></p>
+        <ul>
+          <% dateObj.times.forEach(time => { %>
+            <li><%= time %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+<div id="timeModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Select Available Times</h2>
+            <span class="close">&times;</span>
+        </div>
+        <form id="timeForm">
+            <div class="input-group">
+                <input type="text" id="meetingDate" placeholder="Select Date">
+            </div>
+            <div class="input-group">
+                <label for="startTimeInput">Start Time:</label>
+                <input type="time" id="startTimeInput">
+            </div>
+            <div class="input-group">
+                <label for="endTimeInput">End Time:</label>
+                <input type="time" id="endTimeInput">
+            </div>
+            <button type="button" id="addTime" class="btn-dark">Add Time Range</button>
+            <ul id="timeList"></ul>
+            <button type="submit" class="btn-dark">Save</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+<div class="admin-table-container">
+
+    <div class="filter-pagination-section">
+    <input type="text" id="searchInput" placeholder="Search by ID or Email...">
+    
+    <select id="statusFilter">
+        <option value="all">All</option>
+        <option value="pending">Pending</option>
+        <option value="confirmed">Confirmed</option>
+        <option value="done">Done</option>
+    </select>
+    
+    <button id="filterBtn">Filter</button>
+    
+    <div class="pagination">
+        <a href="#" id="prevPage">Previous</a>
+        <% for(let i = 1; i <= 10; i++) { %> <!-- We'll just generate 10 pages for simplicity -->
+            <a href="#"><%= i %></a>
+        <% } %>
+        <a href="#" id="nextPage">Next</a>
+    </div>
+</div>
+
+    
+    <table class="admin-table">
+        
+        <thead>
+            <tr>
+                <th>Counseling Date</th>
+                <th>Created by</th>
+                <th>Purpose</th>
+                <th>Date created</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="meetingTableBody">
+            <% meetings.forEach(meeting => { %>
+                <tr>
+                    <td><%= meeting.date %></td>
+                    <td><%= meeting.user.username %> (<%= meeting.user.email %>)</td>
+                    <td><%= meeting.purpose %></td>
+                    <td><%= meeting.createdAt %></td>
+                    <td class="<% if (!meeting.isConfirm && !meeting.isDone) { %>status-pending<% } else if (meeting.isConfirm && !meeting.isDone) { %>status-confirmed<% } else { %>status-done<% } %>">
+                        <% if (!meeting.isConfirm && !meeting.isDone) { %>
+                            Pending
+                        <% } else if (meeting.isConfirm && !meeting.isDone) { %>
+                            Confirmed
+                        <% } else { %>
+                            Done
+                        <% } %>
+                    </td>
+                    <td>
+                        <% if (!meeting.isConfirm && !meeting.isDone) { %>
+                            <form action="/confirm-meeting/<%= meeting.id %>" method="POST">
+                                <button type="submit" class="confirm-button" onclick="reloadPage()">Confirm</button>
+                            </form>
+                        <% } else if (meeting.isConfirm && !meeting.isDone) { %>
+                            <form action="/mark-as-done/<%= meeting.id %>" method="POST">
+                                <button type="submit" class="mark-done-button" onclick="reloadPage()">Mark as Done</button>
+                            </form>
+                        <% } %>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    function reloadPage() {
+        location.reload();
+    }
+    const rowsPerPage = 10; // Change this to display however many rows you want per page
+    const tableBody = document.getElementById('meetingTableBody');
+    const rows = Array.from(tableBody.querySelectorAll('tr'));
+    let currentPage = 1;
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+    function displayPage(page) {
+        // Hide all rows
+        rows.forEach(row => row.style.display = 'none');
+
+        // Display rows for the current page
+        for (let i = (page - 1) * rowsPerPage; i < page * rowsPerPage && i < rows.length; i++) {
+            rows[i].style.display = '';
+        }
+
+        // Update active link
+        const links = document.querySelectorAll('.pagination a');
+        links.forEach(link => link.classList.remove('active'));
+        links[page].classList.add('active'); // Assuming the first link is "Previous" and the last link is "Next"
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initial display
+        displayPage(currentPage);
+
+        // Add click event to pagination links
+        document.querySelectorAll('.pagination a').forEach(a => {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                if (this.id === 'prevPage' && currentPage > 1) {
+                    currentPage--;
+                } else if (this.id === 'nextPage' && currentPage < totalPages) {
+                    currentPage++;
+                } else if (this.id !== 'prevPage' && this.id !== 'nextPage') {
+                    currentPage = +this.textContent;
+                }
+
+                displayPage(currentPage);
+            });
+        });
+    });
+</script>
+
+
+</body>
+<script src="/js/counseling-admin.js"></script>
+</html>

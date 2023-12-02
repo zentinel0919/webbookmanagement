@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="nav">
+            <li class="nav-logo">
+                <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+            </li>
+            <div class="nav-items">
+            <li><div class="dropdown"><a class="navtext" href="/directory">
+              DASHBOARD
+              </a>
+              <div class="dropdown-content">
+            <a href="/admin/homepage">Hompage Components</a>
+              </div>
+            </div>
+            </li>
+            <li><div class="dropdown"><a class="navtext" href="#">
+              SERVICES
+              </a>
+              <div class="dropdown-content">
+                <a href="/counseling">Counseling</a>
+                <a href="/admin/job">Manage OJT</a>
+              </div>
+            </div>
+            </li>
+            <li><a class="navtext" href="/user/profile">Profile</a></li>
+            <li><a class="navtext" href="/logout">Logout</a></li>
+            </div>
+        </ul>
+    </nav>
+    <div class="upper-description">
+        <div class="description-content">
+        <h2>Homepage Components</h2>
+        <span></span>
+        </div>
+        </div>
+    <main>
+        <div id="page1" class="page">
+            <div class="button-container">
+            <button class="next-btn" data-next="page2">Next</button>
+        </div>
+            <div class="container">
+                <!-- Announcement Board -->
+                <div class="announcement-board">
+                    <div class="ann-header">
+                        <h2>ANNOUNCEMENT</h2>
+                        </div>
+
+                    <% announcements.forEach(announcement => { %>
+                    <div class="announcement">
+                        <h3><%= announcement.title %></h3>
+                        <p><%= announcement.content %></p>
+                        <img src="<%= announcement.image %>" alt="Announcement Image">
+                        <p>Date: <%= announcement.date %></p>
+
+                        <!-- Edit and Delete Forms for each announcement -->
+                        <form action="/admin/announcement/edit/<%= announcement.id %>" method="post" enctype="multipart/form-data">
+                            <input type="text" name="title" placeholder="Title" value="<%= announcement.title %>" required="">
+                            <textarea name="content" placeholder="Content" required=""><%= announcement.content %></textarea>
+                            <input type="file" name="image" alt="">
+                            <button type="submit">Edit Announcement</button>
+                        </form>
+
+                        <form action="/admin/announcement/delete/<%= announcement.id %>" method="post">
+                            <button type="submit">Delete Announcement</button>
+                        </form>
+                    </div>
+                    <% }) %>
+
+                    <!-- Form to Add New Announcement -->
+                </div>
+                <div class="add-ann">
+                <form action="/admin/announcement/add" method="post" enctype="multipart/form-data">
+                    <input type="text" name="title" placeholder="Title" required="">
+                    <textarea name="content" placeholder="Content" required=""></textarea>
+                    <input type="file" name="image" alt="">
+                    <button type="submit">Add Announcement</button>
+                </form>
+            </div>
+            </div>
+            </div>
+
+            <div id="page2" class="page" style="display: none;">
+                <div class="button-container">
+                <button class="prev-btn" data-previous="page1">Previous</button>
+                <button class="next-btn" data-next="page3">Next</button>
+                </div>
+            <div class="div-box-container">
+                <div class="div-box">
+                    <div class="div-title">
+                        QUOTE OF THE DAY
+                       </div>
+                    <% divBoxImages.forEach(image => { %>
+                        <img src="<%= image.image %>" alt="DivBox Image">
+                    <% }) %>
+                    <!-- Form to Add New Image for DivBox -->
+                </div>
+                <div class="div-form">
+                <form action="/admin/divbox/add" method="post" enctype="multipart/form-data">
+                    <input type="file" name="image" alt="">
+                    <button type="submit">Switch Image</button>
+                </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="page3" class="page" style="display: none;">
+            <div class="button-container">
+            <button class="prev-btn" data-previous="page2">Previous</button>
+        </div>
+            <div class="div-box2-container">
+                <div class="div-box2">
+                    <div class="div-title">
+                        OTHERS
+                       </div>
+                    <% divBox2Images.forEach(image => { %>
+                        <img src="<%= image.image %>" alt="DivBox2 Image">
+                    <% }) %>
+                    <!-- Form to Add New Image for DivBox2 -->
+                </div>
+                <div class="div-form">
+                <form action="/admin/divbox2/add" method="post" enctype="multipart/form-data">
+                    <input type="file" name="image" alt="">
+                    <button type="submit">Switch Image</button>
+                </form>
+               </div>
+            </div>
+            
+            </div>  
+        </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.next-btn').click(function() {
+                var nextPage = $(this).data('next');
+                $('.page').hide();
+                $('#' + nextPage).show();
+            });
+
+            $('.prev-btn').click(function() {
+                var previousPage = $(this).data('previous');
+                $('.page').hide();
+                $('#' + previousPage).show();
+            });
+        });
+    </script>
+    </body>
+        </html>

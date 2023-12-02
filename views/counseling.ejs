@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/counseling.css">
+    <title>Counseling</title>
+</head>
+<body>
+
+  <nav>
+    <ul class="nav">
+        <li class="nav-logo">
+            <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+        </li>
+        <div class="nav-items">
+        <li><div class="dropdown"><a class="navtext" href="/directory">
+          HOME
+          </a>
+          <div class="dropdown-content">
+            <a href="/directory#About-Us">About Us</a>
+            <a href="/directory#Contact-Us">Contact Us</a>
+          </div>
+        </div>
+        </li>
+        <li><div class="dropdown"><a class="navtext" href="#">
+          SERVICES
+          </a>
+          <div class="dropdown-content">
+            <a href="/counseling">Counseling</a>
+            <a href="/ojt-search">OJT Search</a>
+            <a href="/interview">Interview Simulation</a>
+            <a href="/builder">Builder</a>
+          </div>
+        </div>
+        </li>
+        <li><a class="navtext" href="/user/profile">Profile</a></li>
+        <li><a class="navtext" href="/logout">Logout</a></li>
+        </div>
+    </ul>
+</nav>
+
+
+<div class="upper-description">
+    <img src="/assets/upper-description.png" alt="Description Background" class="description-bg-image">
+    <div class="description-content">
+    <h2>Counseling</h2>
+    <span>Welcome to the Counseling Scheduler, an intuitive online platform designed to streamline the appointment setting process for students seeking career guidance.
+         Our scheduler is tailored to the unique needs of the Technological Institute of the Philippines community,
+        offering a user-friendly interface that makes booking a session with our experienced career counselors both quick and convenient.</span>
+    </div>
+    </div>
+<div class="container">
+    <div class="first-part">
+    <h2>Available Dates</h2>
+        <div id="calendar" class="calendar"></div>
+        <div id="timeSlotModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Schedule for Counseling</h2>
+                <form action="/schedule-meeting" method="POST">
+                    <input type="hidden" id="meetingDate" name="meetingDate" required>
+                    <label for="availableTimeSlots">Time:</label>
+                    <select id="availableTimeSlots" name="meetingTime" aria-placeholder="Select TimeSlot" required></select>
+                    <br>
+                    <label for="meetingPurpose">Purpose:</label>
+                    <select class="form-group" name="meetingPurpose" id="meetingPurpose" required="">
+                        <option value="">Select Purpose</option>
+                        <option value="Applying">Applying</option>
+                        <option value="Career Planning">Career Planning</option>
+                        <option value="Career Transition">Career Transition</option>
+                        <option value="Entrepreneurship">Entrepreneurship</option>
+                        <option value="Mental Health and Well-being">Mental Health and Well-being</option>
+                        <option value="Internship and Co-op Placement">Internship and Co-op Placement</option>
+                    </select>
+                    <br>
+                    <button type="submit">Schedule Meeting</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <section class="meeting-queue">
+      <h2>Meeting Queue</h2>
+      <div class="search-filter-group">
+    </div>
+      <div class="pagination-buttons">
+        <input type="date" id="searchDateInput" placeholder="Search by date...">
+        <input type="text" id="searchPurposeInput" placeholder="Search by purpose...">
+        <button id="searchFilterBtn">Search</button>
+          <button class="page-button active" data-page="confirmed">Confirmed</button>
+          <button class="page-button" data-page="pending">Pending</button>
+          <button class="page-button" data-page="done">History</button>
+      </div>
+  
+      <div class="meeting-page active" id="confirmed">
+          <ul>
+              <% meetings.filter(m => m.isConfirm && !m.isDone).forEach(meeting => { %>
+                  <li>
+                    <strong>Date:</strong> <%= new Date(meeting.date).toISOString().split('T')[0] %><br>
+                      <strong>Start Time:</strong> <%= meeting.startTime %><br>
+                      <strong>End Time:</strong> <%= meeting.endTime %><br>
+                      <strong>Purpose:</strong> <%= meeting.purpose %><br>
+                      <strong>Status:</strong> Confirmed
+                  </li>
+              <% }) %>
+          </ul>
+      </div>
+  
+      <div class="meeting-page" id="pending">
+          <ul>
+              <% meetings.filter(m => !m.isConfirm && !m.isDone).forEach(meeting => { %>
+                  <li>
+                    <strong>Date:</strong> <%= new Date(meeting.date).toISOString().split('T')[0] %><br>
+                      <strong>Start Time:</strong> <%= meeting.startTime %><br>
+                      <strong>End Time:</strong> <%= meeting.endTime %><br>
+                      <strong>Purpose:</strong> <%= meeting.purpose %><br>
+                      <strong>Status:</strong> Pending
+                  </li>
+              <% }) %>
+          </ul>
+      </div>
+
+      <div class="meeting-page" id="done">
+        <ul>
+            <% meetings.filter(m => m.isDone).forEach(meeting => { %>
+                <li>
+                    <strong>Date:</strong> <%= new Date(meeting.date).toISOString().split('T')[0] %><br>
+                    <strong>Start Time:</strong> <%= meeting.startTime %><br>
+                      <strong>End Time:</strong> <%= meeting.endTime %><br>
+                    <strong>Purpose:</strong> <%= meeting.purpose %><br>
+                    <strong>Status:</strong> Done
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+
+  </section>
+  
+    
+        </div>
+    
+</body>
+<script>
+document.getElementById('searchFilterBtn').addEventListener('click', function() {
+    var searchDate = document.getElementById('searchDateInput').value;
+    var searchPurpose = document.getElementById('searchPurposeInput').value.toLowerCase();
+    
+    // Convert date to ISO string and then to date-only format
+    searchDate = searchDate ? new Date(searchDate).toISOString().split('T')[0] : '';
+
+    // Get all the meeting list items
+    var meetingItems = document.querySelectorAll('.meeting-page.active ul li');
+    
+    meetingItems.forEach(function(meeting) {
+        var meetingDateText = meeting.querySelector('strong').nextSibling.textContent;
+        var meetingDate = meetingDateText.substring(0, meetingDateText.indexOf('Start Time:')).trim();
+        var meetingPurposeText = meeting.querySelector('strong:nth-of-type(4)').nextSibling.textContent;
+        var meetingPurpose = meetingPurposeText.toLowerCase().trim();
+
+        if ((searchDate && meetingDate !== searchDate) || (searchPurpose && !meetingPurpose.includes(searchPurpose))) {
+            meeting.style.display = 'none';
+        } else {
+            meeting.style.display = 'block'; // or whatever display style was originally used
+        }
+    });
+});
+</script>
+
+
+<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/js/pikaday.min.js"></script>
+<script src="/js/counseling.js"></script>
+
+</html>

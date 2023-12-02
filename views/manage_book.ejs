@@ -1,381 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Book Management</title>
+  <title>Job Management</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/manage-job.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
   <style>
-    /* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url('/assets/webbg.jpg');
-  }
-  
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    box-shadow: 2px 2px 1px 1px #00000057;
-  }
-  
-  h1, h2, h3 {
-    margin: 0;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  nav ul li {
-    display: inline;
-    margin-right: 10px;
-  }
-  
-  nav ul li a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  main {
-    margin: 20px;
-  }
-  
-  section {
-    margin-bottom: 20px;
-  }
-  
-  footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    bottom: 0;
-  }
-  
-  /* Admin Dashboard Specific Styles */
-  h2 {
-    margin-top: 0;
-  }
-  
-  a {
-    color: #0066cc;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  p {
-    line-height: 1.5;
-  }
-  
-  /* Book Management Section */
-  h3 {
-    margin-top: 0;
-  }
-  
 
 
-h1,
-h2,
-h3 {
-  margin: 0;
-}
-
-nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-nav ul li {
-  display: inline;
-  margin-right: 10px;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-main {
-  margin: 20px;
-}
-
-section {
-  margin-bottom: 20px;
-}
-
-/* Admin Dashboard Specific Styles */
-h2 {
-  margin-top: 0;
-  color: white;
-  text-shadow: 5px 5px 2px #333;
-}
-
-a {
-  color: #0066cc;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-p {
-  line-height: 1.5;
-}
-
-/* Book Management Section */
-h3 {
-  margin-top: 0;
-}
-
-.book-management{
-  color: #fefefe;
-  text-shadow: 5px 5px 2px #333;
-}
-
-.del-book{
-  color: #fefefe;
-  text-shadow: 5px 5px 2px #333;
-}
-
-/* User Management Section */
-
-.book-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-
-    .book-item {
-  width: calc(48% - 10px);
-  display: flex;
-  align-items: center;
-  background-color: #ffffffcb;
-  border-radius: 5px;
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  padding: 1%;
-}
-
-#searchInput {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      width: 300px;
-    }
-
-    #searchInput::placeholder {
-      color: #999;
-    }
-
-    #searchInput:focus {
-      outline: none;
-      border-color: #0066cc;
-      box-shadow: 0 0 5px #0066cc;
-    }
-
-.book-image {
-  width: 100px; /* Adjust the width as desired */
-  height: 100px; /* Adjust the height as desired */
-}
-
-.book-image img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-
-    .book-title {
-      font-weight: bold;
-    }
-
-    .book-author {
-      margin-top: 5px;
-      color: #666;
-    }
-
-    form {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    input[type="text"],
-    select {
-      width: 70%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      margin-bottom: 10px;
-    }
-
-    select {
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23333' d='M7.5 10l5-5 5 5H7.5z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      background-size: 12px;
-    }
-
-
-    input[type="file"] {
-      margin-bottom: 10px;
-    }
-
-    button[type="submit"] {
-      background-color: #333;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      box-shadow: 2px 2px 1px 1px #00000057;
-    }
-
-    /* Responsive Styles */
-    @media screen and (max-width: 768px) {
-      .book-item {
-        width: 100%;
-      }
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        text-align: center;
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-
-      .modal-content-add {
-        background-color: #fefefe;
-        margin: 8% auto;
-        padding: 4%;
-        border: 1px solid #888;
-        width: 60%;
-        background-position-y: 1%;
-        background-position-x: 35%;
-        background-repeat: no-repeat;
-        background-size: auto;
-        box-shadow: 0px 0px 15px 1px rgb(0, 0, 0);
-      }
-
-      .modal-content-edit {
-        background-color: #fefefe;
-        margin: 4% auto;
-        padding: 4%;
-        border: 1px solid #888;
-        width: 60%;
-        background-position-y: 35%;
-        background-position-x: 35%;
-        background-repeat: no-repeat;
-        background-size: auto;
-        box-shadow: 0px 0px 15px 1px rgb(0, 0, 0);
-      }
-
-      .close {
-        color: #1a1717;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-      }
-
-      .close:hover,
-      .close:focus {
-        color: rgb(68, 32, 32);
-        text-decoration: none;
-        cursor: pointer;
-      }
-
-      .add {
-      background-color: #333;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      box-shadow: 2px 2px 1px 1px #00000057;
-      }
-
-      .edit {
-      background-color: #333;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      box-shadow: 2px 2px 1px 1px #00000057;
-      }
 
   </style>
 </head>
 <body>
-  <header>
-    <h1>Admin Dashboard</h1>
-    <nav>
-      <ul>
-        <li><a href="/directory">Dashboard</a></li>
-        <li><a href="/admin/book">Book Management</a></li>
-        <li><a href="/admin/users">User Management</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
+  <nav>
+    <ul class="nav">
+      <li class="nav-logo">
+        <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+    </li>
+    <div class="nav-items">
+        <li><div class="dropdown"><a class="navtext" href="/directory">
+          DASHBOARD
+          </a>
+          <div class="dropdown-content">
+        <a href="/admin/homepage">Hompage Components</a>
+          </div>
+        </div>
+        </li>
+        <li><div class="dropdown"><a class="navtext" href="#">
+          SERVICES
+          </a>
+          <div class="dropdown-content">
+            <a href="/counseling">Counseling</a>
+            <a href="/admin/job">Manage OJT</a>
+          </div>
+        </div>
+        </li>
+        <li><a class="navtext" href="/user/profile">Profile</a></li>
+        <li><a class="navtext" href="/logout">Logout</a></li>
+        </div>
+    </ul>
+</nav>
   
   <main>
     <section>
       <div class="button-container">
-        <h2 class="book-management">Book Management</h2><br>
-        <button class="btn btn-success add" onclick="document.getElementById('add-modal').style.display='block'">Add</button>
-        <button class="btn btn-success edit" onclick="document.getElementById('edit-modal').style.display='block'">Edit</button>
+        <h2 class="book-management">OJT Management / ADMIN</h2><br>
+        <button class="btn btn-success add">Add</button>
+        <button class="btn btn-success edit">Edit</button>
       </div>
       <br>
 
-      <h3 ckass="del-book">Delete Book</h3>
-      <br>
-      <form id="delete-book-form">
-        <select id="delete-book-select" name="bookId">
-          <% books.forEach(function(book) { %>
-            <option value="<%= book.id %>"><%= book.title %></option>
-          <% }); %>
-        </select>
-        <button onclick="refreshPage()" type="submit" class="delete-book-btn">Delete Book</button>
-      </form>
-
-
-      <input type="text" id="searchInput" placeholder="Search by title or author" onkeyup="filterBooks()">
+      <input type="text" id="searchInput" placeholder="Search by title or program" onkeyup="filterJobs()">
       <div class="book-list">
-        <% books.forEach(function(book) { %>
-          <div class="book-item">
-            <div class="book-image">
-              <img src="/assets/images/<%= book.image %>" alt="Book Image">
-            </div>
-            <div class="book-info">
-              <p class="book-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="/books/<%= book.id %>"><%= book.title %></a>
+        <% jobs.forEach(function(job) { %>
+          <div class="job-item">
+            <div class="job-info">
+              <p class="job-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="job-title-link" href="/jobs/<%= job.id %>"><%= job.title %></a>
                 </p>
-              <p class="book-author">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author: <%= book.author %></p>
-              <p class="book-genre">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Genre: <%= book.genre %></p>
+              <p class="job-program">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company: <%= job.company %></p>
+              <p class="job-program">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Program: <%= job.program %></p>
             </div>
           </div>
         <% }) %>
@@ -385,31 +73,28 @@ h3 {
         <div class="modal-content-add">
           <span class="close" onclick="document.getElementById('add-modal').style.display='none'">&times;</span>
           <div>
-      <h3>Add New Book</h3><br>
-      <form id="add-book-form" enctype="multipart/form-data" action="/admin/book/add" method="POST"">
-        <label for="edit-title">Title</label>
+      <h3>Add New Job</h3><br>
+      <form id="add-job-form" enctype="multipart/form-data" action="/admin/job/add" method="POST"">
+        <label for="edit-title">Job Title</label>
         <input type="text" name="title" placeholder="Title" required>
-        <label for="edit-author">Author</label>
-        <input type="text" name="author" placeholder="Author" required>
-        <label for="edit-genre">Genre</label>
-        <select class="form-control" name="genre" id="genre" required="">
-          <option value="">Select Genre</option>
-          <option value="Fantasy">Fantasy</option>
-          <option value="Science-Fiction">Science Fiction</option>
-          <option value="Historical-Fiction">Historical Fiction</option>
-          <option value="Realistic-Fiction">Realistic Fiction</option>
-          <option value="Fan-Fiction">Fan Fiction</option>
-          <option value="Narrative-Non-Fiction">Narrative Non Fiction</option>
-          <option value="Biography">Biography</option>
-          <option value="Periodicals">Periodicals</option>
-          <option value="Self-Help-Book">Self Help Book</option>
-          <option value="Reference-Book">Reference Book</option>
+        <label for="edit-company">Company</label>
+        <input type="text" name="company" placeholder="Company" required>
+        <label for="edit-program">Program</label>
+        <select class="form-control" name="program" id="program" required="">
+          <option value="">Select Program</option>
+          <option value="Business Education">Business Education</option>
+          <option value="Arts">Arts</option>
+          <option value="Engineering & Architecture">Engineering & Architecture</option>
+          <option value="Computer Studies">Computer Studies</option>
         </select><br />
+        <label for="edit-location">Location Address</label>
+        <input type="text" class="form-control" name="location" id="location" placeholder="Address" required>
+        <br />
         <label for="edit-description">Description</label>
-        <input type="text" name="description" placeholder="Description" required>
-        <label for="edit-image">Image</label>
-        <input type="file" name="image" required>
-        <button onclick="refreshPage()" type="submit">Add Book</button>
+        <textarea class="description-textarea" name="description" placeholder="Description" id="description" required rows="20" cols="80">
+        </textarea>
+        <br>
+        <button onclick="refreshPage()" type="submit">Add Job</button>
       </form>
       </div>
       </div></div>
@@ -419,44 +104,36 @@ h3 {
         <div class="modal-content-edit">
           <span class="close" onclick="document.getElementById('edit-modal').style.display='none'">&times;</span>
           <div>
-      <h3>Edit Book Details</h3><br>
-      <form id="edit-book-form" enctype="multipart/form-data" action="/admin/book/add" method="POST"">
-        <select id="book-select" name="bookId">
-          <% books.forEach(function(book) { %>
-            <option value="<%= book.id %>"><%= book.title %></option>
+      <h3>Edit OJT Details</h3><br>
+      <form id="edit-job-form" enctype="multipart/form-data" action="/admin/job/edit" method="POST"">
+        <select id="book-select" name="jobId">
+          <% jobs.forEach(function(job) { %>
+            <option value="<%= job.id %>"><%= job.title %> ( <%= job.id %> ) </option>
           <% }); %>
         </select>
-        <label for="edit-title">New Title</label>
+        <label for="edit-title">Job Title</label>
         <input type="text" id="edit-title" name="title" placeholder="Title" required>
-        <label for="edit-author">New Author</label>
-        <input type="text" id="edit-author" name="author" placeholder="Author" required>
-        <label for="edit-genre">New Genre</label>
-        <select class="form-control" name="genre" id="genre" required="">
-          <option value="">Select Genre</option>
-          <option value="Fantasy">Fantasy</option>
-          <option value="Science-Fiction">Science Fiction</option>
-          <option value="Historical-Fiction">Historical Fiction</option>
-          <option value="Realistic-Fiction">Realistic Fiction</option>
-          <option value="Fan-Fiction">Fan Fiction</option>
-          <option value="Narrative-Non-Fiction">Narrative Non Fiction</option>
-          <option value="Biography">Biography</option>
-          <option value="Periodicals">Periodicals</option>
-          <option value="Self-Help-Book">Self Help Book</option>
-          <option value="Reference-Book">Reference Book</option>
-        </select><br /> 
+        <label for="edit-company">Company</label>
+        <input type="text" id="edit-company" name="company" placeholder="Company" required>
+        <label for="edit-program">Qualification</label>
+        <select class="form-control" name="program" id="program" required="">
+          <option value="">Select Program</option>
+          <option value="Business Education">Business Education</option>
+          <option value="Arts">Arts</option>
+          <option value="Engineering & Architecture">Engineering & Architecture</option>
+          <option value="Computer Studies">Computer Studies</option>
+        </select><br />
+        <label for="edit-location">Location Address</label>
+        <input type="text" class="form-control" name="location" id="location" placeholder="Address" required>
+        <br />
         <label for="edit-description">New Description</label>
-        <input type="text" name="description" placeholder="Description" required>
-        <label for="edit-image">New Image</label>
-        <input type="file" name="image" required>
+        <input type="text" name="description" placeholder="Description" required><br>
         <button onclick="refreshPage()" type="submit" class="edit-book-btn">Save Changes</button>
       </form>
       </div></div></div>
 
     </section>
   </main>
-  <footer>
-    &copy; 2023 Admin Dashboard
-  </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
@@ -464,45 +141,40 @@ h3 {
     function refreshPage() {
       setTimeout(function() {
           location.reload();
-        }, 2000);
+        }, 5000);
     }
     
-        function filterBooks() {
+        function filterJobs() {
           const input = document.getElementById('searchInput');
           const filter = input.value.toLowerCase();
-          const bookItems = document.getElementsByClassName('book-item');
+          const jobItems = document.getElementsByClassName('job-item');
 
           // Iterate through each book item and hide/show based on the filter
-          for (let i = 0; i < bookItems.length; i++) {
-            const title = bookItems[i].querySelector('.book-title').textContent.toLowerCase();
-            const author = bookItems[i].querySelector('.book-author').textContent.toLowerCase();
+          for (let i = 0; i < jobItems.length; i++) {
+            const title = jobItems[i].querySelector('.job-title').textContent.toLowerCase();
+            const company = jobItems[i].querySelector('.job-program').textContent.toLowerCase();
 
-            if (title.includes(filter) || author.includes(filter)) {
-              bookItems[i].style.display = '';
+            if (title.includes(filter) || company.includes(filter)) {
+              jobItems[i].style.display = '';
             } else {
-              bookItems[i].style.display = 'none';
+              jobItems[i].style.display = 'none';
             }
           }
         }
 
-        
-      window.onclick = function(event) {
-    var modal = document.getElementById('add-modal');
-    if (event.target == modal) {
-      modal.style.display = "none"
-    }
-  }
+
+
 
       $(document).ready(function() {
       // Add Book Form Submission
-      $('#add-book-form').submit(function(event) {
+      $('#add-job-form').submit(function(event) {
         event.preventDefault();
         var formData = $(this).serialize();
         
         // Make AJAX request to add book
         $.ajax({
           type: 'POST',
-          url: '/admin/book/add',
+          url: '/admin/job/add',
           data: formData,
           success: function(response) {
             // Handle success response
@@ -516,41 +188,16 @@ h3 {
       });
 
 
-
     // Edit Book Form Submission
-    $('#edit-book-form').submit(function(event) {
+    $('#edit-job-form').submit(function(event) {
       event.preventDefault();
       var formData = $(this).serialize();
-      var bookId = $('#book-select').val();
+      var jobId = $('#book-select').val();
 
       // Make AJAX request to edit book
       $.ajax({
         type: 'POST',
-        url: '/admin/book/edit/' + bookId,
-        data: formData,
-        success: function(response) {
-          // Handle success response
-          console.log(response);
-        },
-        error: function(error) {
-          // Handle error response
-          console.log(error);
-        }
-      });
-    });
-
-
-
-    // Delete Book Form Submission
-    $('#delete-book-form').submit(function(event) {
-      event.preventDefault();
-      var formData = $(this).serialize();
-      var bookId = $('#delete-book-select').val();
-
-      // Make AJAX request to delete book
-      $.ajax({
-        type: 'POST',
-        url: '/admin/book/delete/' + bookId,
+        url: '/admin/job/edit/' + jobId,
         data: formData,
         success: function(response) {
           // Handle success response
@@ -563,6 +210,20 @@ h3 {
       });
     });
   });
+
+  
+function showAddModal() {
+  var modal = document.getElementById('add-modal');
+  modal.style.display = 'block';
+}
+document.querySelector('.btn.add').addEventListener('click', showAddModal);
+
+function showEditModal() {
+  var modal = document.getElementById('edit-modal');
+  modal.style.display = 'block';
+}
+document.querySelector('.btn.edit').addEventListener('click', showEditModal);
+
   </script>
 </body>
 </html>

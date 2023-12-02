@@ -12,36 +12,102 @@ datasource db {
 
 model User {
   id            Int      @id @map("_id")
-  unique_id     Int
+  unique_id     Int      @unique
   email         String   @unique
+  phone         String?      
   gender        String
   username      String
+  program       String 
   password      String
   passwordConf  String
+  profilePic    String?
   isAdmin       Boolean  @default(false)
+  isVerified      Boolean  @default(false)
+  verificationToken    String? @unique
+  
+  applications JobApplication[] @relation("UserToJobApplication")
+  meetings   Meeting[]
 }
 
-model Book {
-  id           String         @id @default(uuid()) @map("_id")
+model Job {
+  id           String     @id @default(uuid()) @map("_id")
   title        String
-  author       String
+  company      String
   description  String
-  genre        String
-  image        String
-
-  favoritedBy  FavoriteBook[]
+  program      String
+  location     String
+  favoritedBy  FavoriteJob[]
+  applications JobApplication[] @relation("JobToJobApplication")
 }
 
-model FavoriteBook {
+model Announcement {
+  id          String     @id @default(uuid()) @map("_id")
+  title       String
+  content     String
+  image       String?
+  date        DateTime
+}
+
+model DivBox {
+  id          String     @id @default(uuid()) @map("_id")
+  image       String
+}
+
+model DivBox2 {
+  id          String     @id @default(uuid()) @map("_id")
+  image       String
+}
+
+
+
+model FavoriteJob {
   id          String  @id @default(uuid()) @map("_id")
   userId      Int
-  bookId      String
+  jobId       String
   title       String?
-  author      String?
-  genre       String?
-  image       String?
-  book        Book    @relation(fields: [bookId], references: [id])
-
-  @@unique([userId, bookId])
+  company     String?
+  program     String?
+  location    String?
+  job         Job    @relation(fields: [jobId], references: [id])
+  @@unique([userId, jobId])
   
+}
+
+
+model Meeting {
+  id         String  @id @default(uuid()) @map("_id")
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int      @map("_user_id")
+  date       DateTime
+  startTime  String
+  endTime    String
+  purpose    String
+  createdAt  DateTime
+  isConfirm  Boolean  @default(false)
+  isDone     Boolean  @default(false)
+  isExpired  Boolean  @default(false)
+}
+
+
+
+model AvailableDate {
+  id    String   @id @default(uuid()) @map("_id")
+  date  DateTime
+  times String[]
+}
+
+
+
+model JobApplication {
+  id        String   @id @default(uuid()) @map("_id")
+  userId    Int      @map("user_id")
+  jobId     String   @map("job_id")
+  username  String
+  email     String
+  program   String
+  title     String
+  resume    String
+  createdAt DateTime @default(now()) @map("created_at")
+  job   Job   @relation(name: "JobToJobApplication", fields: [jobId], references: [id])
+  user  User  @relation(name: "UserToJobApplication", fields: [userId], references: [id])
 }

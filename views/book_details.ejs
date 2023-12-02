@@ -2,132 +2,164 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Book Details</title>
-  <link rel="stylesheet" href="./css/admin.css">
-  <style>
-    /* Add your custom styles here */
-
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-image: url('/assets/webbg.jpg');
-    }
-
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 20px;
-    }
-
-    .book-image {
-      flex: 0 0 300px;
-      margin-right: 20px;
-    }
-
-    .book-details {
-      flex: 1;
-    }
-
-    .book-title {
-      font-size: 24px;
-      margin-top: 0;
-    }
-
-    .book-author {
-      font-size: 16px;
-      color: #888;
-      margin-top: 5px;
-    }
-
-    .book-genre {
-      font-size: 16px;
-      color: #888;
-      margin-top: 5px;
-    }
-
-    .book-description {
-      margin-top: 20px;
-    }
-
-  header {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  box-shadow: 2px 2px 1px 1px #00000057;
-}
-
-nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    bottom: 0;
-  }
-
-  
-nav ul li {
-  display: inline;
-  margin-right: 10px;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-h1,
-h2,
-h3 {
-  margin: 0;
-}
-
-    .go-back-link {
-      display: block;
-      margin-top: 20px;
-    }
-  </style>
+  <title>Job Details</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/job-details.css">
 </head>
 <body>
-  <header>
-    <h1>Book Details</h1>
+  
     <nav>
-      <ul>
-        <li><a href="/admin/book">Book Management</a></li>
-        <li><a href="/admin/users">User Management</a></li>
-        <li><a href="/logout">Logout</a></li>
+      <ul class="nav">
+        <li class="nav-logo">
+          <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+      </li>
+      <div class="nav-items">
+          <li><div class="dropdown"><a class="navtext" href="/directory">
+            HOME
+            </a>
+            <div class="dropdown-content">
+          <a href="#About-Us">About Us</a>
+          <a href="#Contact-Us">Contact Us</a>
+            </div>
+          </div>
+          </li>
+          <li><div class="dropdown"><a class="navtext" href="#">
+            SERVICES
+            </a>
+            <div class="dropdown-content">
+              <a href="/counseling">Counseling</a>
+              <a href="/ojt-search">OJT Search</a>
+              <a href="/interview">Interview Simulation</a>
+              <a href="/builder">Builder</a>
+            </div>
+          </div>
+          </li>
+          <li><a class="navtext" href="/user/profile">Profile</a></li>
+          <li><a class="navtext" href="/logout">Logout</a></li>
+          </div>
       </ul>
-    </nav>
-  </header>
-  <main>
-    <section>
-  <div class="container">
-    <img class="book-image" src="/assets/images/<%= book.image %>" alt="Book Image">
-    <div class="book-details">
-      <h2 class="book-title"><%= book.title %></h2>
-      <p class="book-author"><strong>Author:</strong> <%= book.author %></p>
-      <p class="book-genre"><strong>Genre:</strong> <%= book.genre %></p>
-      <p class="book-description"><strong>Description:</strong> <%= book.description %></p>
-      <a class="go-back-link" href="/directory">Go Back to Home</a>
+  </nav>
+
+
+<!-- ... (rest of the HTML above) -->
+
+<!-- The Modal -->
+<div id="applyModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Apply for <%= job.title %></h2>
+    <p>Name: <%= user.username %></p>
+    <p>Email: <%= user.email %></p>
+    <p>Gender: <%= user.gender %></p>
+    <p>Program: <%= user.program %></p> 
+    <form action="/user/uploadResume/<%= job.id %>" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="jobId" value="<%= job.id %>">
+        <input type="hidden" name="username" value="<%= user.username %>">
+        <input type="hidden" name="email" value="<%= user.email %>">
+        <input type="hidden" name="program" value="<%= user.program %>">
+        <label for="resume">Upload your resume (PDF only):</label>
+        <input type="file" name="resume" accept=".pdf" required>
+        <div class="consent-container">
+          <input type="checkbox" id="consentCheckbox" name="consent" required>
+          <label for="consentCheckbox" >I consent to the processing of my personal data in accordance with the <a href="/privacy-policy" target="_blank">Privacy Policy</a>.</label>
+        </div> 
+        <button type="submit" id="submitBtn" disabled>Submit Application</button>
+    </form>
+  </div>
+</div>
+
+
+
+<main class="container">
+  <div class="job-header">
+      <h2 class="job-title"><%= job.title %></h2>
+      <p class="job-company"><%= job.company %></p>
+  </div>
+  <div class="job-content">
+      <p class="job-program"><strong>Program:</strong> <%= job.program %></p>
+      <p class="job-location"><strong>Location:</strong> <%= job.location %></p>
+      <p class="job-description"><strong>Description:</strong> <%= job.description %></p>
+  </div>
+  <div class="job-actions">
+      <div class="apply-button-div"><button class="apply-button">Apply</button></div>
+      <div class="save-button-div"><button class="save-button"  onclick="addToFavorite('<%= job.id %>')">
+          <span class="bookmark-icon">&#9733;</span> <!-- Using a star as a bookmark icon -->
+          Save
+      </button></div>
+      <div class="go-back-div">
+        <button class="go-back-link" onclick="goBack()">Go Back</button>
     </div>
+    
   </div>
 </main>
-  </section>
-  <footer>
-    &copy; 2023 Admin Dashboard
-  </footer>
+
+
+ 
 </body>
+
+<script>
+
+function goBack() {
+    window.location.href = "/ojt-search";
+}
+
+
+document.getElementById('consentCheckbox').addEventListener('change', function() {
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = !this.checked;
+});
+
+
+// Get the modal
+var modal = document.getElementById("applyModal");
+
+// Get the button that opens the modal
+var btn = document.querySelector(".apply-button");
+
+// Get the <span> element that closes the modal
+var span = document.querySelector(".close");
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+
+    const userId = '<%= userId %>';
+
+  function addToFavorite(jobId) {
+
+fetch('/user/profile', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ userId: userId, jobId: jobId }),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Book added to favorite list:', data);
+  
+  })
+  .catch((error) => {
+    console.error('Error adding book to favorite list:', error);
+    // Handle the error and display an error message if necessary 
+  });
+}
+</script>
+
 </html>

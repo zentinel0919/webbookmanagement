@@ -1,163 +1,289 @@
-/* Global Styles */
-body{
-    background-color: rgb(158, 140, 140);
-    background-image: url('/assets/webbg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: white;
-}
-  
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    box-shadow: 2px 2px 1px 1px #00000057;
-  }
-  
-  h1, h2, h3 {
-    margin: 0;
-    text-shadow: 3px 3px 2px #333;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  nav ul li {
-    display: inline;
-    margin-right: 10px;
-  }
-  
-  nav ul li a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  main {
-    margin: 20px;
-  }
-  
-  section {
-    margin-bottom: 20px;
-  }
-  
-  footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    
-  }
-  
-  /* Admin Dashboard Specific Styles */
-  h2 {
-    margin-top: 0;
-  }
-  
-  a {
-    color: #0066cc;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  p {
-    line-height: 1.5;
-  }
-  
-  /* Book Management Section */
-  h3 {
-    margin-top: 0;
-  }
-  
-  /* User Management Section */
-  /* admin.css */
-
-/* Global Styles */
-body {
-  font-family: Arial, sans-serif;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-header {
-  background-color: #333;
-  color: #fff;
+.map {
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+
+
+::-webkit-scrollbar {
+  width: 8px; /* Width of the vertical scrollbar */
+  height: 8px; /* Height of the horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(241, 241, 241, 0.3); /* Color of the track with reduced opacity */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.5); /* Color of the scroll thumb with reduced opacity */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0.7); /* Color of the scroll thumb on hover with reduced opacity */
+}
+
+
+
+body {
+  background-image: linear-gradient(
+      rgba(34, 34, 34, -0.4),
+      rgba(34, 34, 34, -2.4)
+  ), url('/assets/Background.png');
+  background-size: cover;
+  font-family: sans-serif;
+}
+
+/* Default styles for mobile view - stacked charts */
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+iframe {
+  width: 100%;
+  max-width: 600px;  /* You can adjust this value */
+  margin: .2%;
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+  .chart-container {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  iframe {
+    width: 45%;  /* Adjust as necessary */
+  }
+}
+
+
+.dashboard-container{
+  margin: 1%;
+  background-color: #d3cdcd;
+  padding: 2%;
+  border-radius: 10px;
+}
+
+.dashboard-description{
+  font-weight: 600;
+}
+
+.admin-dashboard-text{
+  margin-bottom: 20px;
+  color: #1b1b1b;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.459);
+  padding: 1%;
+  font-weight: 800;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 55px;
+  background-color: #ffd43b;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   padding: 20px;
 }
 
-h1,
-h2,
-h3 {
-  margin: 0;
+.nav {
+  background-color: #ffd43b;
+  display: flex;
+  justify-content: space-between; /* This will push the logo to the left and nav-items to the right */
+  align-items: center; /* This will vertically center the items */
+  padding: 30px;
+  box-shadow: 0px 0px 8px 2px rgba(58, 57, 57, 0.582);
 }
 
-nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+.nav-logo img {
+  max-width: 100%;
+  width: 13.8rem;
+  height: auto;
+  position: absolute;
+  top: 0;
+  margin-left: 5%;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.199);
 }
 
-nav ul li {
-  display: inline;
-  margin-right: 10px;
+.nav-items {
+  display: flex;
+  justify-content: flex-end; /* This will push the navtext to the right */
+  align-items: center; /* This will vertically center the items */
+  height: 100%; /* This will make the nav-items take the full height of the nav bar */
 }
 
-nav ul li a {
+
+li {
+  list-style: none;
+}
+
+
+.navtext:active, .navtext:hover, .dropdown:hover .dropbtn  {
+  background-color: #5683ec;
   color: #fff;
+  border-radius: 90px;
+  transition: all 0.3s;
+  font-size: larger;
+  box-shadow: 0px 5px 5px 0px black;
   text-decoration: none;
 }
 
-main {
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: rgb(0, 0, 0);
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  font-weight: bold;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-content a {
+  float: none;
+  color: rgb(17, 17, 17);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  transition: .5s;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.charts{
+  background-color: #000;
+}
+
+.navtext:link, a:visited {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.p-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 23px;
+  align-content: center;
+  text-align: center;
+}
+
+.gif-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0.35rem 0.50rem .35rem rgb(0, 0, 0));
+
+}
+
+.width {
+  width: 1300px;
+  margin: 0 auto;
+  margin-top: -4%;
+}
+
+.job-title-link{
+  text-decoration: none;
+  font-size: 120%;
+  font-weight:600;
+  color: #000;
+}
+
+.job-title-link:hover{
+  text-decoration: none;
+  background-color: #5683ec;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  transition: .2s;
+  border-radius: 20px;
+  box-shadow: 0px 3px 4px 2px rgb(0, 0, 0);
+  color: white;
+}
+
+/* Main Content Styles */
+.dashboard-container {
+  background-color: #f5f5f5; /* Light background for the container */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   margin: 20px;
 }
 
-section {
+.admin-dashboard-text {
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+}
+
+.dashboard-description {
+  font-size: 16px;
+  color: #666;
   margin-bottom: 20px;
 }
 
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-  position: relative;
+.chart-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* General Body Styles */
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Responsive Iframes */
+iframe {
   width: 100%;
-  bottom: 0;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);
 }
-
-/* Admin Dashboard Specific Styles */
-h2 {
-  margin-top: 0;
-}
-
-a {
-  color: #0066cc;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-p {
-  line-height: 1.5;
-}
-
-/* Book Management Section */
-h3 {
-  margin-top: 0;
-}
-
-.chart{
-  background-color: #ffffff8e;
-  padding: 2%;
-  border-radius: 3%;
-  margin-top: 2%;
-  box-shadow: 2px 2px 1px 1px #00000057;
-}
-
-/* User Management Section */
-

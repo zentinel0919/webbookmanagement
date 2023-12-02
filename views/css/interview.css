@@ -1,0 +1,407 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #8FB4BD;
+}
+
+.crop-container {
+  width: 100%; /* or the width you want */
+  height: 20rem; /* or the height you want */
+  overflow: hidden; /* this will hide anything outside the container */
+  background-color: #8FB4BD; /* background color if the image doesn't cover the whole area */
+  box-shadow: inset 0px 0px 10px 2px #5d757a;
+}
+
+img {
+  width: 50%; /* makes the image stretch to cover the width */
+  height: auto; /* adjusts height automatically to maintain aspect ratio */
+  object-fit: cover;
+}
+
+/* Adjust margins to crop the top/left of the image, if necessary */
+.crop-container img {
+  margin-left: 40%; /* adjust as necessary */
+  margin-top: -7%; /* adjust as necessary */
+  box-shadow: inset 0px 0px 10px 2px #060707 ;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.3rem 5%;
+    background-color: #333;
+  
+}
+
+.nav-logo img {
+  max-width: 100%;
+  width: 13.8rem;
+  height: auto;
+  position: absolute;
+  top: 0;
+  margin-left: 5%;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.199);
+}
+
+.nav-items {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.navtext {
+    color: #fff;
+    text-decoration: none;
+    padding: 2rem 15px;
+    transition: background-color 0.3s;
+}
+
+.navtext:hover {
+    background-color: #555;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #555;
+    border: 1px solid #444;
+    border-top: none;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #fff;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #666;
+}
+
+.nav-item:hover .dropdown-content {
+    display: block;
+}
+
+.interview-section {
+    background-color: #e0dbdb;
+    padding: .1rem 5%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.interview-section h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #33323285;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.chatbot-header{
+  background-color: #5d757a;
+  color: white;
+  font-size: 120%;
+  padding: 1%;
+  margin-top: 2%;
+  width: 87%;
+  margin-left: auto;
+  margin-right: auto;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+
+.description{
+  font-size: large;
+  color: #333;
+  word-wrap: break-word;
+  width: 50%;
+  padding: 1%;
+  text-align: justify;
+}
+
+.interview-section p {
+    font-size: 1.1rem;
+}
+
+.question-container {
+    margin-top: 2rem;
+}
+
+
+.interview-header{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.171);
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Style the chat container */
+.chat-container {
+    background-color: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    max-height: 8rem;
+    min-height: 30rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+  }
+  
+  /* Style the chat message container */
+  .chat-message-container{
+    margin-bottom: 10px;
+    align-self: flex-start;
+    width: 50%;
+    padding: 1%;
+  }
+  
+
+
+  .user-message-container{
+    margin-bottom: 10px;
+    align-self: flex-end;
+    padding: 1%;
+    width: 40%;
+  }
+  
+  /* Style the user message */
+  .user-message {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    max-width: 100%;
+    word-wrap: break-word;
+    font-size: 1.2rem;
+    box-shadow: 0 0 2px 2px black;
+  }
+  
+  /* Style the bot message */
+  .bot-message {
+    align-self: flex-start;
+    background-color: #3498db;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+    font-size: 1.2rem;
+  }
+  
+  /* Style the sender label */
+  .sender-label {
+    align-self: flex-end; /* Position on the right for the user's message */
+    margin-right: 10px; /* Adjust as needed */
+    font-weight: bold;
+    width: max-content;
+  }
+  
+  .user-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 0 auto;
+    width: 55rem;
+    margin-top: 2%;
+  }
+
+  .user-input .user-textarea {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2rem;
+  }
+
+  .user-input button {
+    margin-left: 10px;
+  }
+
+
+  .interview-form {
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Creates a gap between the elements */
+}
+
+#interview-form {
+    flex-grow: 1; /* Allows the form to take up available space */
+    display: flex;
+    align-items: center; /* Align items of the form vertically */
+    gap: 10px; /* Creates a gap between the form elements */
+}
+
+
+#interview-form textarea {
+    flex-grow: 1; /* Allows the textarea to grow and fill available space */
+    height: 8rem;
+    max-height: 8rem;/* Set a fixed height for the textarea */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0; /* Reset any default margin */
+}
+
+.interview-form button {
+    height: 50px; /* Set the buttons' height to match the textarea */
+    padding: 0 20px; /* Adjust horizontal padding as needed, remove vertical padding */
+    background-color: #5d757a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.interview-form button:hover {
+    background-color: #4cae4c;
+}
+
+/* Additional container for the buttons to align them to the right */
+.buttons-container {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 2%;
+}
+
+/* Ensure the mic and repeat buttons do not grow and push the send button away */
+#micButton, #repeatButton {
+    flex-shrink: 0;
+}
+
+
+
+/* Message Container */
+.user-message-container,
+.bot-message-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.user-message-container {
+    justify-content: flex-end;
+    width: 98%;
+}
+
+.bot-message-container {
+    justify-content: flex-start;
+}
+
+.message-bubble {
+    padding: 15px;
+    border-radius: 20px;
+    max-width: 50%;
+    line-height: 1.4;
+
+}
+
+
+.user-message-container .message-bubble {
+  background-color: #dcf8c6;
+  margin-left: auto;
+  margin-right: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 50%;
+}
+
+.bot-message-container .message-bubble {
+  background-color: #e5e5ea;
+  margin-right: auto; /* Aligns the bubble to the left */
+  margin-left: 10px; /* Spacing from the left edge */
+  word-wrap: break-word; /* ensures that words break to prevent overflow */
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 50%;
+}
+
+#chat-container {
+  scroll-behavior: smooth;
+}
+
+.message-bubble {
+  padding: 15px;
+  border-radius: 20px;
+  max-width: 60%;
+  line-height: 1.4;
+  position: relative;
+  margin: 5px; 
+}
+
+/* Indicator Labels */
+.message-indicator {
+  position: absolute;
+  top: -1em;
+  font-size: 0.75em;
+  color: #666;
+}
+
+.user-message-container .message-indicator {
+  right: 10px; 
+  margin-bottom: 1%;
+}
+
+.bot-message-container .message-indicator {
+  left: 10px; 
+  margin-bottom: 1%;
+}
+
+.interaction-container{
+  display: grid;
+  margin-top: 3%;
+  grid-template-columns: 2fr 50%;
+  background-color: #8FB4BD;
+  border-radius: 30px;
+  padding: 2%;
+  box-shadow: inset 0px 0px 5px 5px rgba(108, 137, 143, 0.69);
+}
+
+#avatar-image{
+  border-radius: 360%;
+  height: 30rem;
+  width: auto;
+  padding: 5%;
+  box-shadow: -4px -4px 1px 1px rgb(95, 89, 89);
+  transition: transform 0.2s ease-in-out;
+}
+
+.chat-wrapper{
+  margin-bottom: 2%;
+}
+
+.animation {
+  margin-left: auto;
+  margin-right: auto;
+}

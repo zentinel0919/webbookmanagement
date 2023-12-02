@@ -1,0 +1,557 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Reset some default styles */
+body, h1, h2, ul, li, p {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+
+
+
+  ::-webkit-scrollbar {
+    width: 8px; /* Width of the vertical scrollbar */
+    height: 8px; /* Height of the horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0.3); /* Color of the track with reduced opacity */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.5); /* Color of the scroll thumb with reduced opacity */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(85, 85, 85, 0.7); /* Color of the scroll thumb on hover with reduced opacity */
+}
+  
+  .admin-dashboard-text{
+    color: #030303;
+    text-shadow: 1px 1px 2px #333;
+    box-shadow: 2px 2px 5px 1px #333;
+    background-color: #ffd43b;
+    backdrop-filter: blur(2px);
+    width: fit-content;
+    padding: 1%;
+    border-radius: 5px;
+    margin: 1%;
+}
+  
+.nav {
+  background-color: #ffd43b;
+  display: flex;
+  justify-content: space-between; /* This will push the logo to the left and nav-items to the right */
+  align-items: center; /* This will vertically center the items */
+  padding: 30px;
+  box-shadow: 0px 0px 8px 2px rgba(58, 57, 57, 0.582);
+}
+
+.nav-logo img {
+  max-width: 100%;
+  width: 13.8rem;
+  height: auto;
+  position: absolute;
+  top: 0;
+  margin-left: 5%;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.199);
+}
+
+.nav-items {
+  display: flex;
+  justify-content: flex-end; /* This will push the navtext to the right */
+  align-items: center; /* This will vertically center the items */
+  height: 100%; /* This will make the nav-items take the full height of the nav bar */
+}
+
+
+li {
+  list-style: none;
+}
+
+.navtext:link, a:visited {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.navtext:active, .navtext:hover, .dropdown:hover .dropbtn  {
+  background-color: #5683ec;
+  color: #fff;
+  border-radius: 90px;
+  transition: all 0.3s;
+  font-size: larger;
+  box-shadow: 0px 5px 5px 0px black;
+  text-decoration: none;
+}
+
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: rgb(0, 0, 0);
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  font-weight: bold;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-content a {
+  float: none;
+  color: rgb(17, 17, 17);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  transition: .5s;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+  
+  /* Style the container */
+  .container {
+    justify-content: space-evenly;
+    background-color: #F7F7F7;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 3%;
+  }
+  
+  /* Style the counseling appointment section */
+  .meeting-appointment {
+    background-image: linear-gradient(
+      rgba(139, 137, 137, 0.24),
+        rgb(139, 137, 137, 0.24)
+    ), url('/assets/Counselingbg2.png');
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px 1px rgb(32, 31, 31, 0.644);
+    height: 40rem;
+
+  }
+
+
+  .counseling-text {
+    font-size: 24px;
+    margin-bottom: 10px;
+    
+  }
+  
+  .form-group {
+    width: 100%;
+    margin-top: 4%;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input[type="date"],
+  input[type="time"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #ff5722;
+  }
+
+  
+  /* Style the meeting queue section */
+  .meeting-queue {
+    overflow-y: auto;
+    height: 30rem;
+    padding: 2%;
+    border-radius: 10px;
+    background-image: url("/assets/queue-design.png");
+    background-repeat: no-repeat;
+    background-size: 35rem 20rem;
+    background-position: 0 100%;
+  }
+
+  .container h2 {
+    margin-bottom: 20px;
+    color: #1b1b1b;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.459);
+    padding: 1%;
+    font-weight: 800;
+  }
+  
+  
+  .meeting-queue ul {
+    list-style: none;
+  }
+  
+  .meeting-queue li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #35373a8a;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .meeting-queue li:hover {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #696969;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0px 0px 1px 1px rgb(32, 31, 31, 0.644);
+    transition: .5s;
+  }
+
+  .admin-grid ul {
+    list-style: none;
+  }
+  
+  .admin-grid li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    width: auto;
+    box-shadow: 3px 3px 7px 1px rgba(32, 31, 31, 0.644);
+    margin: 3%;
+  }
+
+ 
+  
+  /* Add a background image to the body */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-image: linear-gradient(rgba(34, 34, 34, 0.1), rgba(34, 34, 34, 0.1)), url('/assets/Background2.png');
+    background-size: cover;
+    color: #333;
+    line-height: 1.6;
+}
+
+.information{
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+  /* Calendar Styles */
+.calendar {
+  max-width: 100%;
+  border-radius: 5px;
+  padding: 2%;
+  z-index: 2;
+}
+
+.first-part {
+
+  background-size: 25rem 15rem;
+  background-repeat: no-repeat;
+  background-position: 20% -1rem;
+}
+
+
+.calendar-header {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  background-color: #282921;
+  color: white;
+  padding: 10px 15px;
+  border: 1px solid #695f5f;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0px 0px 1px 1px rgb(32, 31, 31, 0.644);
+  backdrop-filter: blur(20px);
+}
+
+
+
+.calendar-table th,
+.calendar-table td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #695f5f;
+  cursor: pointer;
+}
+
+.calendar-table td:hover {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #695f5f;
+  cursor: pointer;
+  text-shadow: 1px 1px 1px black;
+  background-color: #ffd43b;
+  font-weight: bolder;
+  transition: .5s;
+}
+
+
+.calendar-table th {
+  background-color: #ada6a6;
+}
+
+/* Calendar Navigation Buttons */
+#prev-month,
+#next-month {
+  background-color: #555454;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+#prev-month:hover,
+#next-month:hover {
+  background-color: #ff5722;
+}
+
+/* Selected Date Indicator */
+.selected-date {
+  background-color: #ff5722;
+  color: #fff;
+  font-weight: bold;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: 40rem 40rem;
+  padding: 2rem;
+  justify-content: space-around;
+  height: 55rem;
+  margin: 2%;
+  background-color: #31272760;
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+}
+
+.admin-column1 {
+  margin: 1rem;
+  background-image: url("/assets/Counselingbg2.png");
+  overflow-y: auto;
+  height: 25rem;
+  border-radius: 10px;
+}
+
+.admin-column1 h3 {
+  background-color: #282921;
+  padding: 2%;
+  width: auto;
+  margin: 0%;
+  border-radius: 5px;
+  color: white;
+  margin-bottom: 2%;
+}
+
+.admin-column2 {
+  margin: 1rem;
+  background-image: url("/assets/Counselingbg1.png");
+  overflow-y: auto;
+  height: 25rem;
+  border-radius: 10px;
+}
+
+.admin-column2 h3 {
+  background-color: #282921;
+  padding: 2%;
+  width: auto;
+  margin: 0%;
+  border-radius: 5px;
+  color: white;
+  margin-bottom: 2%;
+}
+
+.admin-column3 {
+  margin: 1rem;
+  background-image: url("/assets/Counselingbg2.png");
+  overflow-y: auto;
+  height: 25rem;
+  border-radius: 10px;
+  grid-column: span 2;
+}
+
+.admin-column3 h3{
+  background-color: #282921;
+  padding: 2%;
+  width: auto;
+  margin: 0%;
+  border-radius: 5px;
+  color: white;
+  margin-bottom: 2%;
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  background-color: #282921;
+  color: white;
+  padding: 10px 15px;
+  border: 1px solid #695f5f;
+}
+
+.page-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  background-color: #383636;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  color: white;
+}
+
+.page-button:hover {
+  background-color: #463f3f;
+}
+
+.meeting-page {
+  display: none; /* Hide all pages by default */
+}
+
+.meeting-page.active {
+  display: block; /* Only the active page will be displayed */
+}
+
+.page-button.active {
+  background-color: #464542;
+  color: #fffafa;
+  font-weight: bolder;
+}
+
+@media screen and (max-width: 60rem) {
+  .container {
+      grid-template-columns: auto;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: center;
+}
+
+.navtext {
+    margin: 5px 0;
+}
+}
+
+.available-date {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover, .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.upper-description {
+  position: relative;
+  background: linear-gradient(to left, #F7F7F7 40%, rgb(129, 248, 113));
+  height: 20rem;
+  padding: 1%;
+  overflow: hidden; /* This will keep the absolute-positioned image within the div */
+}
+
+.description-bg-image {
+  position: absolute;
+  right: 10%; /* Adjust as needed */
+  top: 20%;  /* Adjust as needed */
+  width: 30%;
+  height: auto; /* Adjust as needed */
+}
+
+.description-content {
+  position: relative;
+  z-index: 1; /* This ensures the text appears above the background image */
+  width: 50%;
+  margin: 4%;
+}
+
+.upper-description h2 {
+  margin-bottom: 20px;
+  color: #1b1b1b;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.459);
+  padding: 1%;
+  font-weight: 800;
+  font-size: 220%;
+}

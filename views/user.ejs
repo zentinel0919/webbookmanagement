@@ -1,282 +1,264 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>User Directory</title>
-  <style>
-
-/* Global Styles */
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url("assets/webbg.jpg");
-  }
-  
-
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    box-shadow: 2px 2px 1px 1px #00000057;
-  }
-  
-  h1, h2, h3 {
-    margin: 0;
-    color: #fefefe;
-  text-shadow: 5px 5px 2px #333;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  nav ul li {
-    display: inline;
-    margin-right: 10px;
-  }
-  
-  nav ul li a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  main {
-    margin: 20px;
-  }
-  
-  section {
-    margin-bottom: 20px;
-  }
-  
-  footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    bottom: 0;
-  }
-  
-  /* Admin Dashboard Specific Styles */
-  h2 {
-    margin-top: 0;
-  }
-  
-  a {
-    color: #0066cc;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  p {
-    line-height: 1.5;
-  }
-  
-  /* Book Management Section */
-  h3 {
-    margin-top: 0;
-  }
-  
-
-h1,
-h2,
-h3 {
-  margin: 0;
-}
-
-nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-nav ul li {
-  display: inline;
-  margin-right: 10px;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-main {
-  margin: 20px;
-}
-
-section {
-  margin-bottom: 20px;
-}
-
-/* Admin Dashboard Specific Styles */
-h2 {
-  margin-top: 0;
-}
-
-a {
-  color: #0066cc;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-p {
-  line-height: 1.5;
-}
-
-/* Book Management Section */
-h3 {
-  margin-top: 0;
-}
-
-/* User Management Section */
-
-.book-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-
-  .book-item {
-  width: calc(48% - 10px);
-  display: flex;
-  align-items: center;
-  background-color: #ffffffcb;
-  border-radius: 5px;
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  padding: 1%;
-}
-
-.book-image {
-  width: 100px; /* Adjust the width as desired */
-  height: 100px; /* Adjust the height as desired */
-}
-
-.book-image img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-
-#searchInput {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      width: 300px;
-    }
-
-    #searchInput::placeholder {
-      color: #999;
-    }
-
-    #searchInput:focus {
-      outline: none;
-      border-color: #0066cc;
-      box-shadow: 0 0 5px #0066cc;
-    }
-
-    .book-title {
-      font-weight: bold;
-    }
-
-    .book-author {
-      margin-top: 5px;
-      color: #666;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/homepage-user.css">
+    <title>Home</title>
 </head>
-<body>
-	<header>
-		<h1>Welcome, <%= name %>!</h1>
-		<nav>
-		  <ul>
-        <li><a href="/directory">Home</a></li>
-        <li><a href="/user/favorites">Favorite</a></li>
-        <li><a href="/user/profile">Profile</a></li>
-        <li><a href="/logout">Logout</a></li>
-		  </ul>
-		</nav>
-	  </header>
-    <main>
-      <section>
-  <h2>Book List</h2><br>
-  <input type="text" id="searchInput" placeholder="Search by title or author" onkeyup="filterBooks()">
-  <div class="book-list">
-    <% books.forEach(function(book) { %>
-      <div class="book-item">
-        <div class="book-image">
-          <img src="/assets/images/<%= book.image %>" alt="Book Image">
-        </div>
-        <div class="book-info">
-          <p class="book-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="/books/<%= book.id %>"><%= book.title %></a>
-            </p>
-          <p class="book-author">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author: <%= book.author %></p>
-          <p class="book-genre">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Genre: <%= book.genre %></p>
-          <button class="favorite-button"  onclick="addToFavorite('<%= book.id %>')">
-            <i class="favorite-icon">Add</i>
-        </div>
-      </div>
-    <% }) %>
-  </div>
 
-  <script>
-
-        function filterBooks() {
-          const input = document.getElementById('searchInput');
-          const filter = input.value.toLowerCase();
-          const bookItems = document.getElementsByClassName('book-item');
-
-          // Iterate through each book item and hide/show based on the filter
-          for (let i = 0; i < bookItems.length; i++) {
-            const title = bookItems[i].querySelector('.book-title').textContent.toLowerCase();
-            const author = bookItems[i].querySelector('.book-author').textContent.toLowerCase();
-
-            if (title.includes(filter) || author.includes(filter)) {
-              bookItems[i].style.display = '';
-            } else {
-              bookItems[i].style.display = 'none';
-            }
-          }
-        }
-
-    function addToFavorite(bookId) {
-      // Send an AJAX request to the server to add the book to the user's favorite list
-
-      fetch('/user/favorite', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userId: '<%= userId %>', bookId: bookId }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Book added to favorite list:', data);
-        
-        })
-        .catch((error) => {
-          console.error('Error adding book to favorite list:', error);
-          // Handle the error and display an error message if necessary
-        });
+<style>
+    .nav {
+        margin-bottom: 3%;
     }
-  </script>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2023 User. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+</style>
+
+<body>
+    <nav>
+        <ul class="nav">
+            <li class="nav-logo">
+                <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+            </li>
+            <div class="nav-items">
+            <li><div class="dropdown"><a class="navtext" href="/directory">
+              HOME
+              </a>
+              <div class="dropdown-content">
+            <a href="#About-Us">About Us</a>
+            <a href="#Contact-Us">Contact Us</a>
+              </div>
+            </div>
+            </li>
+            <li><div class="dropdown"><a class="navtext" href="#">
+              SERVICES
+              </a>
+              <div class="dropdown-content">
+                <a href="/counseling">Counseling</a>
+                <a href="/ojt-search">OJT Search</a>
+                <a href="/interview">Interview Simulation</a>
+                <a href="/builder">Builder</a>
+              </div>
+            </div>
+            </li>
+            <li><a class="navtext" href="/user/profile">Profile</a></li>
+            <li><a class="navtext" href="/logout">Logout</a></li>
+        </div>
+        </ul>
+    </nav>
+    <body>
+         <div class="upper-homepage">
+        <div class="hello-homepage">
+            <div class="logo-img"><img src="/assets/careercenter3.png" alt=""></div>
+            <div class="hello-text">The T.I.P. Career Center aims to bring you closer to the career of your dreams. 
+            The center provides the resources needed for your career development.
+            It also links you to T.I.P.'s leading industry partners for internship, job placement, and other opportunities. 
+            Our committed staff is passionate about supporting you in choosing and building your path towards a successful career.
+            </div>
+        </div>
+    </div>
+        <main>
+            <div class="width">
+                <div class="Board">BOARD</div>
+                <div class="container">
+                    <div class="announcement-board">
+                        <div class="ann-header">
+                        <h2>ANNOUNCEMENT</h2>
+                        </div>
+                        <!-- Sample Announcement -->
+                        <div class="announcement">
+                            <p><% announcements.forEach(announcement => { %>
+                                <div class="announcement">
+                                    <h3><%= announcement.title %></h3>
+                                    <p><%= announcement.content %></p>
+                                    <img src="<%= announcement.image %>" alt="Announcement Image">
+                                    <p>Date: <%= announcement.date %></p>
+                                </div>
+                            <% }) %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="div-box">
+                        <div class="div-title">
+                         QUOTE OF THE DAY
+                        </div>
+                        <img src="/assets/divbox1.jpg" alt="/assets/divbox1.jpg">
+                    </div>
+                    <div class="div-box2">
+                        <div class="div-title">
+                            OTHERS
+                           </div>
+                        <img src="/assets/divbox2.jpg" alt="/assets/divbox2.jpg">
+                    </div>
+                </div>
+            </div>
+
+        <div class="About-Us-header">ABOUT US</div>
+        <div class="About-Us" id="About-Us" > 
+        <img class="career-image" width="17%" height="15%" src="/assets/CareerCenter.png" alt="hello">
+        <img class="career-image3" src="/assets/image3.png" alt="hello">
+        <img class="career-image1" src="/assets/image1.png" alt="hello">
+        <img class="career-image4" src="/assets/image4.png" alt="hello">
+        <img class="career-image5" src="/assets/image5.png" alt="hello">
+        <div class="upperimage">
+            <img class="main-image" id="aboutImage" width="12%" height="12%" src="/assets/Background3.png" alt="hello">
+        </div>
+    <div class="about-1st-section">
+        <div class="about-1st-header">
+            Welcome T.I.Pians!
+        </div>
+        <div class="about-1st-paragraph">
+            At Your Career Resource Center, we are dedicated to empowering individuals in their professional journey. Founded in [year of foundation], we have been committed to providing invaluable support to individuals as they navigate the ever-evolving landscape of careers and employment. Our journey began with a passion for helping individuals achieve their career aspirations. Over the years, we have evolved and grown, but our dedication to guiding you toward career success remains unwavering.
+        </div>
+    </div>
+    <div class="about-2nd-section">
+        <div class="about-2nd-header">
+            What Sets Us Apart
+        </div>
+        <div class="about-2nd-paragraph">
+            Here at Your Career Resource Center, we take pride in being your one-stop destination for all things related to career development. Our team of experienced career advisors and experts works tirelessly to provide you with the knowledge, tools, and resources you need to thrive in your professional life.
+        </div>
+    </div>
+    <div class="about-2nd-section">
+        <div class="about-2nd-header">
+            Our Values
+        </div>
+        <div class="about-2nd-paragraph">
+            Integrity, innovation, and excellence are at the core of everything we do. We believe in empowering individuals with the skills and knowledge to excel in their careers. These values drive us to continually provide the best possible career guidance and resources to our valued community.        </div>
+    </div>
+    <div class="about-2nd-section">
+        <div class="about-2nd-header">
+            What We Offer
+        </div>
+        <div class="about-2nd-paragraph">
+            At Your Career Resource Center, we offer a wide range of services and resources to support your career journey. Whether you're a recent graduate exploring job opportunities or a seasoned professional looking to enhance your skills, we have you covered. Our services include:
+                <br><br> • Career Counseling: Our experienced advisors are here to provide personalized guidance and help you navigate your career path.</li>
+                <br> • Job Search Assistance: We offer tools and resources to streamline your job search, including resume building, interview preparation, and job matching services.</li>
+                <br> • Professional Development: Explore our workshops, webinars, and resources designed to enhance your skills and knowledge.</li>
+        </div>
+    </div>
+    <div class="about-2nd-section">
+        <div class="about-2nd-header">
+            Our Team
+        </div>
+        <div class="about-2nd-paragraph">
+            Behind every successful career story is a dedicated team. Our diverse team of career experts and support staff brings a wealth of experience to the table. We work collaboratively to empower you to achieve your career goals.
+        </div>
+    </div>
+    <div class="about-3nd-section">
+        <div class="about-3nd-header">
+            Join Us on Your Career Journey
+        </div>
+        <div class="about-3nd-paragraph">
+            We invite you to join us on your exciting career journey. Whether you're a student, recent graduate, seasoned professional, or an employer seeking top talent, Your Career Resource Center is here to assist you every step of the way. Let us be your partner in success.
+            <br><br>Thank you for visiting Your Career Resource Center. Feel free to explore our services, and don't hesitate to reach out if you have any questions or inquiries. Your success is our success
+        </div>
+    </div>
+</div>
+
+<div class="About-Us-header">
+    CONTACT US
+   </div>
+   
+<div id="Contact-Us" class="container2">
+      
+       <div class="box1 boxz">
+                <p class="p-main">careercenter@tip.edu.ph</p>
+            <p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </svg>
+                    
+                    
+                </p>
+                <p class="p-small">Gmail Account</p>
+            </div>
+        <div class="box2 boxz">
+            <p class="p-main">T.I.P MANILA <br> 1338 Arlegui St., Quiapo, Manila Tel (+632) 8733-91-42-(loc.210)</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+            </svg>
+        </p>
+    </div>
+    <div class="box3 boxz">
+            <p class="p-main">T.I.P. Quezon City <br> 938 Aurora Blvd., Cubao, Quezon City Tel: (+632) 8911-09-64 (loc.503)</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+            </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="star-icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                </svg>
+            </p>
+        </div>
+    </div>
+        </main>
+        
+    </body>
+
+    <script>
+        const imageUrls = [
+            '/assets/aboutus-images.png',
+            '/assets/aboutus-images2.jpg',
+            '/assets/aboutus-images3.jpg',
+            '/assets/aboutus-images4.png',
+            // Add more image URLs as needed
+        ];
+    
+        const imageElement = document.getElementById('aboutImage');
+        let currentIndex = 0;
+        let isFading = false;
+    
+        function changeImage() {
+            if (isFading) return;
+    
+            isFading = true;
+            imageElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % imageUrls.length;
+                imageElement.src = imageUrls[currentIndex];
+                
+                imageElement.onload = () => {
+                    imageElement.style.opacity = '1';
+                    isFading = false;
+                };
+            }, 100); // Wait for transition duration before changing the image
+        }
+    
+        changeImage();
+        setInterval(changeImage, 2000); // Change image every 3 seconds
+    </script>
+    
+        </html>

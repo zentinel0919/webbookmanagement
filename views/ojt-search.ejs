@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/ojt-search.css">
+  <title>OJT Search</title>
+</head>
+<body>
+  <nav>
+    <ul class="nav">
+      <li class="nav-logo">
+        <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
+    </li>
+    <div class="nav-items">
+        <li><div class="dropdown"><a class="navtext" href="/directory">
+          HOME
+          </a>
+          <div class="dropdown-content">
+            <a href="/directory#About-Us">About Us</a>
+            <a href="/directory#Contact-Us">Contact Us</a>
+          </div>
+        </div>
+        </li>
+        <li><div class="dropdown"><a class="navtext" href="#">
+          SERVICES
+          </a>
+          <div class="dropdown-content">
+            <a href="/counseling">Counseling</a>
+            <a href="/ojt-search">OJT Search</a>
+            <a href="/interview">Interview Simulation</a>
+            <a href="/builder">Builder</a>
+          </div>
+        </div>
+        </li>
+        <li><a class="navtext" href="/user/profile">Profile</a></li>
+        <li><a class="navtext" href="/logout">Logout</a></li>
+        </div>
+    </ul>
+</nav>
+<div class="upper-description">
+  <img src="/assets/ojt-design.png" alt="Description Background" class="description-bg-image">
+  <div class="description-content">
+  <h2>OJT Search</h2>
+  <span>Embark on the journey to real-world expertise with our OJT Search platform,
+     a dedicated feature of the Technological Institute of the Philippines Career Center designed to connect our students with meaningful on-the-job training opportunities.
+      Our comprehensive search tool is engineered to match your academic pursuits with the practical experience you need to excel in today's competitive job market.</span>
+  </div>
+  </div>
+    <main>
+      <section>
+        <div class="recommended-part">
+          <h2>Recommended Jobs 🕒</h2><br>
+          <div class="job-list">
+          <% recommendedJobs.forEach(function(job) { %>
+            <div class="job-item">
+              <div class="job-info">
+                <p class="job-title">
+                  <a class="job-title-link" href="/jobs/<%= job.id %>"><%= job.title %></a>
+                </p>
+                <p class="job-company">Company: <%= job.company %></p>
+                <p class="job-program">Program: <%= job.program %></p>
+                <button class="favorite-button" onclick="addToFavorite('<%= job.id %>')">
+                  <i class="favorite-icon">Save to Favorite</i>
+                </button>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+        
+  
+  <h2>Job List</h2><br>
+  <input type="text" id="searchInput" placeholder="Search by company or job title" onkeyup="filterJobs()">
+  <div class="recommendation">
+  <div class="job-list">
+    <% jobs.forEach(function(job) { %>
+      <div class="job-item">
+        <div class="job-info">
+          <p class="job-title">
+            <a class="job-title-link" href="/jobs/<%= job.id %>"><%= job.title %></a>
+            </p>
+          <p class="job-company">Company: <%= job.company %></p>
+          <p class="job-program">Program: <%= job.program %></p>
+          <button class="favorite-button"  onclick="addToFavorite('<%= job.id %>')">
+            <i class="favorite-icon">Save to Favorite</i>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <div class="filter-panel">
+    <h3>Filter by Program:</h3>
+    <ul id="programList">
+      <li><a href="#" onclick="filterJobsByProgram('')">All Programs</a></li>
+      <li><a href="#" onclick="filterJobsByProgram('Business & Management')">Business & Management</a></li>
+      <li><a href="#" onclick="filterJobsByProgram('Creative Arts')">Creative Arts</a></li>
+      <li><a href="#" onclick="filterJobsByProgram('Engineering & Mathematics')">Engineering & Mathematics</a></li>
+      <li><a href="#" onclick="filterJobsByProgram('IT & Computer Science')">IT & Computer Science</a></li>
+      <li><a href="#" onclick="filterJobsByProgram('Teacher & Education')">Teacher & Education</a></li>
+    </ul>
+  </div>
+  
+</div>
+
+  <script>
+        function filterJobs() {
+          const input = document.getElementById('searchInput');
+          const filter = input.value.toLowerCase();
+          const jobItems = document.getElementsByClassName('job-item');
+
+          // Iterate through each book item and hide/show based on the filter
+          for (let i = 0; i < jobItems.length; i++) {
+            const title = jobItems[i].querySelector('.job-title').textContent.toLowerCase();
+            const author = jobItems[i].querySelector('.job-company').textContent.toLowerCase();
+
+            if (title.includes(filter) || author.includes(filter)) {
+              jobItems[i].style.display = 'flex';
+            } else {
+              jobItems[i].style.display = 'none';
+            }
+          }
+        }
+
+
+
+    function addToFavorite(jobId) {
+
+      fetch('/user/profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: '<%= userId %>', jobId: jobId }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Book added to favorite list:', data);
+        
+        })
+        .catch((error) => {
+          console.error('Error adding book to favorite list:', error);
+          // Handle the error and display an error message if necessary 
+        });
+    }
+  </script>
+    </section>
+  </main>
+</body>
+</html>
